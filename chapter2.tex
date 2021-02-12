@@ -1,0 +1,145 @@
+\section{Endliche Finanzmärkte}
+
+\begin{karte}{Stochastischer Prozess, Filtration, adaptiert}
+\begin{enumerate}
+    \item Eine Familie \((X_t)_{t\in I}\) von ZVen \(\abb{X_t}{\Omega}{\R}\) heißt stochastischer Prozess.
+    \item Eine Familie \((\mathcal{F}_t)_{t\in I}\) von Teil-\(\sigma\)-Algebren \(\mathcal{F}_t \subset \mathcal{F}\) heißt Filtration, 
+    falls für alle \(s < t, s,t\in I\) gilt \(\mathcal{F}_s \subset \mathcal{F}_t\).
+    \item Ein stochastischer Prozess \((X_t)_{t\in I}\) heißt adaptiert bezüglich der Filtration \((\mathcal{F}_t)_{t\in I}\), 
+    falls \(X_t\) \(\mathcal{F}_t\)-messbar ist für jedes \(t\in I\).
+\end{enumerate}
+
+Sei \((S_t)_{t\in I}\) ein stochastischer Prozess, der den Preisverlauf einer Aktie darstellt. 
+Dann ist \(\mathcal{F}_t^S = \sigma(S_0, \ldots, S_t) = \set{ (S_0, \ldots, S_t)^{-1}(B) \;|\; B \subset \R^{t+1} \text{ messbar} }\)
+eine Filtration von \(\mathcal{F}_T =: \mathcal{F}\) (auch natürliche Filtration genannt). \((S_t)\) ist adaptiert bzgl. \((\mathcal{F}_t^S)\).
+\(\mathcal{F}_t^S\) gibt die Information wieder, die bis zum Zeitpunkt \(t\) vorliegt.
+\end{karte}
+
+\subsection{Finanzmarkt}
+
+\begin{karte}{Finanzmarkt}
+\begin{itemize}
+    \item \(\Omega\) ist endlich.
+    \item \(\P(\set{\omega}) > 0 \;\forall \omega \in \Omega\).
+    \item \(\mathcal{F}\) ist die Potenzmenge von \(\Omega\).
+    \item Filtration \((\mathcal{F}_t)_{t\in I}\) gegeben. 
+    \item \(\mathcal{F}_0 = \set{\emptyset, \Omega}\) ist die triviale \(\sigma\)-Algebra und \(\mathcal{F}_T = \mathcal{F}\).
+\end{itemize}
+Der Finanzmarkt besteht aus \(d+1\) Anlagemöglichkeiten: 
+\begin{itemize}
+    \item ein risikoloses Wertpapier mit deterministischem Preisprozess \((B_t) = (B_0, \ldots, B_T), B_0 = 1, B_{t+1} \geq B_t > 0\).
+    \item \(d\) risikobehaftete Wertpapiere mit stochastischen Preisprozessen \((S_t^k) = (S_0^k, \ldots, S_T^k), S_t^k(\omega) > 0\). 
+    Setze \(S_t := (S_t^1, \ldots, S_t^d)\). Die Prozesse \(S_t^k\) seien adaptiert bzgl. der gegebenen Filtration \((\mathcal{F}_t)\).
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Handelsstrategie}
+Eine Handelsstrategie oder ein Portfolio \(\varphi = (\varphi_0, \ldots, \varphi_{T-1})\) ist ein 
+\(\R^{d+1}\)-wertiger, \((\mathcal{F}_t)\)-adaptierter stochastischer Prozess, d. h. \(\varphi_t\) 
+ist \(\F_t\)-messbar und 
+\[ \varphi_t := (\alpha_t, \beta_t). \]
+Dabei ist \(\beta_t\) die Stückzahl des risikolosen Wertpapiers in \([t,t+1)\) 
+und \(\alpha_t := (\alpha_t^1, \ldots, \alpha_t^d)\) die Stückzahlen der risikobehafteten Wertpapiere 
+in \([t,t+1)\). 
+\end{karte}
+
+\begin{karte}{Faktorisierungssatz}
+Sei \((\Omega, \F)\) ein Messraum und \(\abb{X,Y}{\Omega}{\R}\) ZVen. Dann sind folgende Aussagen äquivalent: 
+\begin{itemize}
+    \item \(X\) ist \((\sigma(Y), \mathcal{B})\)-messbar. 
+    \item Es existiert eine messbare Abbildung \(\abb{h}{\R}{\R}\) mit \(X = h(Y)\).
+\end{itemize}
+
+Ist eine Handelsstrategie \((\F_t^S)\)-adaptiert, bedeutet dies nach dem Faktorisierungssatz, 
+dass \(\beta_t = \beta_t(S_0, \ldots, S_t)\) und \(\alpha_t^k = \alpha_t^k(S_0, \ldots, S_t)\).
+\end{karte}
+
+\begin{karte}{Wert einer Handelsstrategie}
+Der Wert der Handelsstrategie \(\varphi\) zum Zeitpunkt \(t = 0, \ldots, T-1\) ist gegeben durch 
+\[ V_t^\varphi := \beta_t B_t + \sum_{k=1}^d \alpha_t^k S_t^k =: \beta_t B_t + \alpha_t \cdot S_t. \]
+Außerdem setzen wir \(V_T^\varphi := \beta_{T-1}B_T + \alpha_{T-1} \cdot S_T\).
+\end{karte}
+
+\begin{karte}{Selbstfinanzierend}
+Eine Handelsstrategie \(\varphi\) heißt selbstfinanzierend, falls 
+\[ \beta_{t-1} B_t + \alpha_{t-1} \cdot S_t = \beta_t B_t + \alpha_t \cdot S_t \]
+für alle \(t=1,\ldots, T-1\).
+\end{karte}
+
+\begin{karte}{Definition \(\A\)}
+Es sei 
+\[ \A := \set{ \alpha : \alpha_t \text{ ist } \F_t \text{-messbar}, t=0,\ldots, T-1 } \]
+die Menge der Investitionsstrategien in die risikobehafteten Wertpapiere. Bei vorgegebenem Anfangsvermögen 
+kann jedes \(\alpha \in \A\) selbstfinanzierend ergänzt werden.
+\end{karte}
+
+\begin{karte}{Bestimmung von \(\beta\) aus \(\alpha\) und \(V_0\)}
+Sei \(\Delta X_t := X_t - X_{t-1}\). Weiter sei \(\Delta \alpha_t := (\Delta \alpha_t^1, \ldots, \Delta \alpha_t^d)\). 
+
+Sei \(\varphi\) eine selbstfinanzierende Handelsstrategie. Dann gilt 
+\[ \beta_t = \beta_0 - \sum_{n=1}^t \Delta \alpha_n \cdot \frac{S_n}{B_n} = V_0^\varphi - \sum_{n=0}^t \Delta \alpha_n \cdot \frac{S_n}{B_n}, \]
+wobei \(\Delta \alpha_0^k := \alpha_0^k\).
+\end{karte}
+
+\begin{karte}{Diskontierter Preis}
+Es ist 
+\[ \tilde{S}_t^k := \frac{S_t^k}{B_t} \]
+der diskontierte Preis des \(k\)-ten risikobehafteten Wertpapiers zur Zeit \(t\).
+\end{karte}
+
+\begin{karte}{Diskontierter Wert einer Handelsstrategie}
+Sei \(\varphi\) eine selbstfinanzierende Handelsstrategie. Dann gilt 
+\[ \frac{V_t^\varphi}{B_t} = V_0^\varphi + \sum_{n=1}^t \alpha_{n-1} \cdot \Delta \tilde{S}_n. \]
+\end{karte}
+
+\begin{karte}{Gewinnprozess}
+Den Prozess \((G_t^\alpha)\) für \(\alpha \in \A\), der durch \(G_0^\alpha := 0\) und 
+\[ G_t^\alpha := \sum_{n=1}^t \alpha_{n-1} \cdot \Delta \tilde{S}_n \]
+definiert ist, bezeichnen wir als Gewinnprozess von \(\alpha\). Es gilt dann für eine selbstfinanzierende 
+Handelsstrategie \(\varphi = (\alpha, \beta)\): 
+\[ \frac{V_t^\varphi}{B_t} = V_0^\varphi + G_t^\alpha. \]
+\end{karte}
+
+\begin{karte}{Arbitragestrategie}
+Eine selbstfinanzierende Handelsstrategie \(\varphi\) wird als Arbitragestrategie bezeichnet, falls 
+\[ V_0^\varphi = 0,\quad \P(V_T^\varphi \geq 0) = 1 \text{ und } \P(V_T^\varphi > 0) > 0. \]
+Wir sagen, dass eine Arbitragemöglichkeit existiert, falls eine Arbitragestrategie existiert. 
+(NA) bedeutet, dass keine Arbitragemöglichkeit gegeben ist.
+\end{karte}
+
+\begin{karte}{Arbitragestrategie Charakterisierung}
+Die folgenden Aussagen sind äquivalent:
+\begin{itemize}
+    \item Es gibt eine Arbitragestrategie.
+    \item Es gibt ein \(t\in \set{1,\ldots, T}\) und einen \(\F_{t-1}\)-messbaren Zufallsvektor \(\abb{\eta}{\Omega}{\R^d}\), sodass 
+    \[ \P(\eta \cdot (\tilde{S}_t - \tilde{S}_{t-1}) \geq 0) = 1 \text{ und } \P(\eta \cdot (\tilde{S}_t - \tilde{S}_{t-1}) > 0) > 0. \]
+\end{itemize}
+\end{karte}
+
+\subsection{Optionen}
+
+\begin{karte}{Zahlungsanspruch}
+Ein Zahlungsanspruch ist eine \(\F_T\)-messbare Zufallsvariable \(H\) mit Werten in \(\R\).
+
+Ist \(H\) sogar \(\F_T^S\)-messbar, so ist nach dem Faktorisierungssatz \(H = h(S_0, \ldots, S_T)\) 
+für eine Funktion \(h\).
+
+Beispiele: 
+\begin{itemize}
+    \item Europäische Call-Option mit Basispreis \(K\): \(H = (S_T - K)^+\).
+    \item Europäische Put-Option mit Basispreis \(K\): \(H = (K - S_T)^+\).
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Vollständiger Markt}
+Ein Zahlungsanspruch \(H\) heißt erreichbar, wenn es eine selbstfinanzierende Handelsstrategie \(\varphi\) 
+gibt mit \(V_T^\varphi = H\). Dann heißt \(\pi(H) := V_0^\varphi\) ein Preis von \(H\) und \(\varphi\) eine 
+Hedging-Strategie von \(H\).
+
+Ein Markt wird als vollständig bezeichnet, wenn jeder Zahlungsanspruch erreichbar ist.
+\end{karte}
+
+\begin{karte}{Eindeutigkeit \(\pi(H)\)}
+Es gelte (NA). Dann ist der Preis \(\pi(H)\) für erreichbare Zahlungsansprüche eindeutig bestimmt und damit 
+unabhängig von der Wahl der Hedging-Strategie.
+\end{karte}
