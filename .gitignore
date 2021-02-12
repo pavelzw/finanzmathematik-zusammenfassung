@@ -1,0 +1,17 @@
+*.log
+*.out
+*.gz
+*.toc
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.pdf
+*.fls
+*.fdb_latexmk
+*.url
+*.synctex*
+.vscode
+__latexindent_temp.tex
+*.code-workspace
+*.thm
