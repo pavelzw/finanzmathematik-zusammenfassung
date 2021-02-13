@@ -1,0 +1,232 @@
+\section{Cox-Ross-Rubinstein}
+
+\subsection{Einperiodiges CRR-Modell}
+
+\begin{karte}{Einperiodiges CRR-Modell}
+Sei \(T = 1, \Omega = \set{u, d}, \F_T = \F\) die Potenzmenge von \(\Omega\).
+Weiter seien \(B_0 = 1, B_1 = 1+r\). Wir nehmen an, dass \(S_0>0\) und 
+\[ S_1(\omega) := \begin{cases}
+    u S_0, &\text{falls } \omega = u, \\
+    d S_0, &\text{falls } \omega = d
+\end{cases} \]
+für Faktoren \(0 < d < u\).
+
+Es gilt (NA) \(\Leftrightarrow d < 1+r < u\).
+\end{karte}
+
+\begin{karte}{Vollständigkeit des CRR-Modells}
+Es gelte (NA). Dann ist das CRR-Modell vollständig. 
+Insbesondere ist die Hedging-Strategie für den Zahlungsanspruch \(H\) gegeben durch 
+\[ \alpha_0 = \frac{H(u) - H(d)}{(u-d)S_0} \text{ und } \beta_0 = \frac{u H(d) - d H(u)}{(u-d)(1+r)}. \]
+
+Wir setzen \(q := \frac{1+r-d}{u-d}\), so gilt \(0<q<1\). Dann folgt 
+\[ \pi(H) = \frac{H(u)}{1+r} q + \frac{H(d)}{1+r}(1-q). \]
+Wir definieren ein Wahrscheinlichkeitsmaß \(\Q\) auf \((\Omega, \F_T)\) durch 
+\(\Q(\set{u}) = q\) und \(\Q(\set{d}) = 1-q\). Also können wir schreiben 
+\[ \pi(H) = \E_\Q \left[\frac{H}{1+r}\right] \]
+\(\Q\) ist das einzige Wahrscheinlichkeitsmaß mit \(\E_\Q [ \tilde{S}_1] = \tilde{S}_0\).
+\end{karte}
+
+\subsection{Mehrperiodiges CRR-Modell}
+
+\begin{karte}{Mehrperiodiges CRR-Modell}
+Sei \(T\in \N\), \(r \geq 0\) und \(B_0 = 1, B_{t+1} = (1+r)B_t = (1+r)^{t+1}\).
+\(\Omega := \set{d,u}^T, \F:=\) Potenzmenge von \(\Omega\). 
+
+Wahrscheinlichkeitsmaß \(\P\) mit \(\P(\omega)>0 \forall \omega \in \Omega\).
+
+Zufallsvariablen \(\abb{Y_t}{\Omega}{d,u}\) mit 
+\[ Y_t(\omega) = Y_t((y_1, \ldots, y_T)) := y_t. \]
+Der Preisprozess \(S = (S_t)\) ist dann gegeben durch 
+\[ S_t = S_0 \prod_{n=1}^t Y_n. \]
+
+Es gilt (NA) \(\Leftrightarrow d < 1+r < u\).
+\end{karte}
+
+\begin{karte}{\(\Q\) im mehrperiodigen CRR-Modell}
+Wir definieren \(\Q(\set{\omega}) := \Q(\set{(y_1, \ldots, y_T)}) := q_{y_1} \cdots q_{y_T}\)
+mit 
+\[ q_{y_t} := \begin{cases}
+    q, &\text{falls } y_t = u,\\
+    1-q, &\text{falls } y_t = d
+\end{cases} \text{ und } q := \frac{1+r-d}{u-d}. \]
+Unter \(\Q\) sind \(Y_1, \ldots, Y_T\) unabhängig und identisch verteilt mit \(\Q(Y_t = u) = q = 1-\Q(Y_t - d)\).
+\end{karte}
+
+\begin{karte}{Vollständigkeit des mehrperiodigen CRR-Modells}
+Es gelte (NA). Dann ist das \(T\)-periodige Cox-Ross-Rubinstein-Modell 
+vollständig. Der Preis eines Zahlungsanspruchs \(H\) ist gegeben durch 
+\[ \pi(H) = \beta_0 B_0 + \alpha_0 S_0 = \sum_{(y_1, \ldots, y_T)\in \Omega} q_{y_1} \cdots q_{y_T} \frac{H(\omega)}{B_T} 
+= \E_\Q \left[\frac{H}{B_T}\right]. \]
+\end{karte}
+
+\begin{karte}{Spezialfall Vollständigkeit \(H = h(S_T)\)}
+Es gelte (NA) und \(H = h(S_t)\). Ist \(\varphi\) eine Hedging-Strategie, so gilt 
+\begin{align*}
+    V_T^\varphi(S_{T_1} u) &= \beta_{T-1}(S_{T-1})B_T + \alpha_{T-1}(S_{T-1}) S_{T-1} u, \\
+    V_T^\varphi(S_{T_1} d) &= \beta_{T-1}(S_{T-1})B_T + \alpha_{T-1}(S_{T-1}) S_{T-1} d.
+\end{align*}
+
+Weiter gilt 
+\begin{align*}
+    \alpha_{t-1}(S_{t-1}) &= \frac{V_t^\varphi(S_{t-1} u) - V_t^\varphi(S_{t-1}d)}{(u-d)S_{t-1}}, \\
+    \beta_{t-1}(S_{t-1}) &= \frac{uV_t^\varphi(S_{t-1} d) - V_t^\varphi(S_{t-1}u)}{(u-d) B_t}.
+\end{align*}
+Außerdem erhalten wir 
+\[ V_{t-1}^\varphi(S_{t-1}) = \frac{1}{1+r} (q V_t^\varphi(S_{t-1} u) + (1-q)V_t^\varphi (S_{t-1}d)). \]
+\end{karte}
+
+\begin{karte}{Preis mehrperiodiges CRR-Modell}
+Sei \(H = h(S_T)\). Dann ist der Preis gegeben durch 
+\[ \pi(H) = \E_\Q\left[ \frac{h(S_T)}{B_T} = \frac{1}{B_T} \sum_{t=0}^T \binom{T}{t} q^t (1-q)^{T-t} h(S_0 u^t d^{T-t}). \right] \]
+\end{karte}
+
+\subsection{Übergang zu Black-Scholes}
+
+\begin{karte}{ZGWS von Lindeberg-Feller}
+Für \(n\in \N\) seien \(X_{n1}, \ldots, X_{nr_n}\) unabhängige ZV mit 
+\(\E X_{nk} =: \mu_{nk}\) und \(0 < Var(X_{nk}) =: \sigma_{nk}^2 < \infty\). 
+Wir setzen \(\sigma_n^2 := \sigma_{n1}^2 + \cdots + \sigma_{n r_n}^2\). 
+Wenn 
+\[ \limes{n} \frac{1}{\sigma_n^2} \sum_{k=1}^{r_n} \E \left[ (X_{nk} - \mu_{nk})^2 \mathds{1}_{\set{ \abs{X_{nk} - \mu_{nk}} > \varepsilon \sigma_n }} \right] = 0,  \]
+für alle \(\varepsilon > 0\) erfüllt ist, dann gilt für \(S_n := X_{n1} + \cdots + X_{n r_n}\): 
+\begin{itemize}
+    \item \(\limes{n} \P\left( \frac{S_n - \E S_n}{\sqrt{Var(S_n)}} \leq x \right) = \Phi(x) \) für alle \(x \in \R\).
+    \item Sind \((\alpha_n) \subset \R\) und \((\beta_n) \subset \R\) mit \(\limes{n} \alpha_n = \alpha\) und \(\limes{n} \beta_n = \beta\)
+    mit \(\alpha \leq \beta\), so gilt 
+    \[ \limes{n} \P \left( \alpha_n \leq \frac{S_n - \E S_n}{\sqrt{Var(S_n)}} \leq \beta_n \right) = \Phi(\beta) - \Phi(\alpha). \]
+\end{itemize}
+\end{karte}
+
+\subsection*{Bed. E-Werte, Martingale}
+
+\begin{karte}{Bedingter Erwartungswert}
+Sei \(X \in L^1\). Der bedingte Erwartungswert von \(X\) gegeben \(B\in \F\) 
+mit \(\P(B) > 0\) ist 
+\[ \E [X | B] = \frac{\E[X \mathds{1}_B]}{\P(B)} = \frac{1}{\P(B)} \int_B X d\P. \]
+
+Sei \(G = \sigma(\set{A_1, \ldots, A_n})\) eine Sub-\(\sigma\)-Algebra von \(\F\). 
+Der bedingte Erwartungswert von \(X\) gegeben \(\mathcal{G}\) ist die Zufallsvariable 
+\[ \E[X|\mathcal{G}] := \sum_{i=1}^n \E [X | A_i] \mathds{1}_{A_i}(\omega), \omega \in \Omega. \]
+
+\(\E [X|\mathcal{G}]\) kann als Approximation von \(X\) verstanden werden: 
+Für \(\mathcal{G} = \set{\emptyset, \Omega}\) ist \(\E[X|\mathcal{G}] = \E[X]\), 
+mit \( \mathcal{G} = \F \) gilt \(\E[X|\F] = X\).
+
+Eine Zufallsvariable \(Z\) auf \((\Omega, \F, \P)\) heißt bedingter 
+Erwartungswert von \(X\) gegeben \(\mathcal{G}\), falls gilt: 
+\begin{itemize}
+    \item \(Z\) ist \((\mathcal{G}, \mathcal{B})\)-messbar,
+    \item \(\int_A X d\P = \int_A Z d\P \) für alle \(A\in \mathcal{G}\).
+\end{itemize}
+Bei endlichem \(\Omega\) stimmen beide Definitionen überein.
+\end{karte}
+
+\begin{karte}{Eigenschaften bedingter Erwartungswerte}
+Seien \(X,Y\in L^1\) und \(\mathcal{G}, \mathcal{H}\) seien Sub-\(\sigma\)-Algebren von \(\F\). Dann gilt: 
+\begin{enumerate}
+    \item \(\E \left[\E[X|\mathcal{G}]\right] = \E[X]\).
+    \item Falls \(X\) sogar \(\mathcal{G}\)-messbar ist, so gilt \(\E[X|\mathcal{G}] = X\).
+    \item Linearität: \(\E[aX + bY|\mathcal{G}] = a\E[X|\mathcal{G}] + b\E[Y|\mathcal{G}]\) für \(a,b\in \R\).
+    \item Monotonie: \(X \leq Y \Rightarrow \E[X|\mathcal{G}] \leq \E[Y|\mathcal{G}]\). 
+    \item Bedingte Jensen-Ungl.: Sei \(\abb{f}{\R}{\R}\) konvex und \(f(X) \in L^1\). Dann ist 
+    \[ \E[f(X) |\mathcal{G}] \geq f(\E[X|\mathcal{G}]). \]
+    \item Turmeigenschaft: Ist \(\mathcal{H} \subset \mathcal{G}\), dann gilt: 
+    \[ \E[ \E[X|\mathcal{G}] | \mathcal{H} ] = \E [\E[X | \mathcal{H}] | \mathcal{G}] = \E[X|\mathcal{H}]. \]
+    \item Messbares Ausklammern: Sei \(Y\) \(\mathcal{G}\)-messbar und \(YX \in L^1\), dann gilt 
+    \(\E[YX | \mathcal{G}] = Y \E[X|\mathcal{G}]\).
+    \item Wenn \(X\) unabhängig von \(\mathcal{G}\) ist, dann gilt \(\E[X|\mathcal{G}] = \E[X]\).
+\end{enumerate}
+\end{karte}
+
+\begin{karte}{Martingal}
+Sei \((X_t)\) ein \((\F_t)\)-adaptierter stochastischer Prozess mit \(X_t \in L^1\) für alle 
+\(t\in \N_0\). Der Prozess \((X_t)\) heißt \((\F_t)\)-Martingal, falls gilt: 
+\[ \E[X_t|\F_s] = X_s, \text{ für }s \leq t \]
+Der Prozess \((X_t)\) heißt Submartingal, falls \(\E[X_t|\F_s] \geq X_s\) 
+und Supermartingal, falls \(\E[X_t|\F_s] \leq X_s\) für \(s\leq t\).
+\end{karte}
+
+\begin{karte}{Doob-Martingal}
+Sei \(X\) \(\F\)-messbar. Dann ist \(X_t := \E[X|\F_t]\) ein \((\F_t)\)-Martingal, das sogenannte Doob-Martingal.
+\end{karte}
+
+\begin{karte}{Submartingal durch konvexe Funktionen}
+Sei \((X_t)\) ein \((\F_t)\)-Martingal und \(\abb{f}{\R}{\R}\) eine konvexe Funktion mit 
+\(\E \abs{f(X_t)} < \infty\) für alle \(t\in \N_0\). Dann ist 
+\((f(X_t))\) ein Submartingal.
+\end{karte}
+
+\begin{karte}{Vorhersagbar}
+Ein stochastischer Prozess heißt vorhersagbar, falls \(X_t\) 
+bereits \(\F_{t-1}\)-messbar ist für alle \(t \geq 1\).
+\end{karte}
+
+\begin{karte}{Doobsche Zerlegung}
+Sei \((X_t)\) ein \((\F_t)\)-Supermartingal. Dann gilt: 
+\[ X_t = M_t + A_t, \]
+wobei \((M_t)\) ein \((\F_t)\)-Martingal ist und \((A_t)\) mit \(A_0 = 0\) 
+ein fallender Prozess ist, d. h. \(A_{t+1} \leq A_t\). Außerdem ist \((A_t)\) 
+vorhersagbar. Die Zerlegung ist \(\P\)-f.s. eindeutig.
+\end{karte}
+
+\begin{karte}{Faire Spiele}
+Sei \(\Delta Z_t := Z_t - Z_{t-1}\) der Nettogewinn im \(t\)-ten Spiel pro eingesetzter Geldeinheit. 
+Es sei \(\F_t := \sigma(Z_0, \ldots, Z_t)\).
+Falls \((Z_t)\) ein Martingal ist, ist das Spiel fair, falls \((Z_t)\) ein Supermartingal ist, 
+ist das Spiel unvorteilhaft, bei einem Submartingal vorteilhaft.  
+
+Sei \((C_t)\) ein \((\F_t)\)-adaptierter stochastischer Prozess. 
+\(C_{t-1}\) Spieleinsatz im \(t\)-ten Spiel. Der Gewinn im \(t\)-ten Spiel lautet 
+\(C_{t-1} \Delta Z_t\). 
+Für den Gesamtgewinn gilt: 
+\[ G_t := \sum_{n=1}^t C_{n-1} (Z_n - Z_{n-1}), G_0 := 0 \] 
+Falls \((Z_t)\) ein Martingal ist, wird \((G_t)\) eine Martingaltransformation genannt. 
+Dann ist auch \((G_t)\) ein Martingal.
+\end{karte}
+
+\begin{karte}{Stoppzeit}
+Eine \((\F_t)\)-Stoppzeit ist eine \(\N_0 \cup \set{\infty}\)-wertige Zufallsvariable \(\tau\), sodass 
+\[ \set{ \omega \in \Omega: \tau(\omega) \leq t } \in \F_t \text{ für alle } t\in\N_0. \]
+
+\begin{itemize}
+    \item \(\tau\) ist eine Stoppzeit \(\Leftrightarrow \set{\tau = t} \in \F_t \forall t\in \N_0\).
+    \item Sind \(\tau, \sigma\) \((\F_t)\)-Stoppzeiten, so sind \(\min \set{\tau, \sigma}\), \(\max\set{\tau, \sigma}\) 
+    und \(\tau + \sigma\) \((\F_t)\)-Stoppzeiten.
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Erwartungswert über Stoppzeiten}
+Sei \(\tau\) eine beschränkte \((\F_t)\)-Stoppzeit und \((X_t)\) ein \((\F_t)\)-Martingal. 
+Dann ist \(X_\tau\) integrierbar und \(\E[X_\tau] = \E[X_0]\).
+\end{karte}
+
+\begin{karte}{Martingalkriterium durch Stoppzeiten}
+Sei \((X_t)\) ein \((\F_t)\)-adaptierter stochastischer Prozess mit \(X_t \in L^1\) für 
+alle \(t\in \N_0\). Für jede beschränkte Stoppzeit \(\tau\) gelte 
+\(\E[X_\tau] = \E[X_0]\). Dann ist \((X_t)\) ein Martingal.
+\end{karte}
+
+\begin{karte}{\(\tau\)-Vergangenheit}
+Sei \(\tau\) eine \((\F_t)\)-Stoppzeit. Die \(\sigma\)-Algebra der \(\tau\)-Vergangenheit ist 
+\[ \F_\tau := \set{ A\in \F: A \cap \set{\tau \leq t} \in \F_t \text{ für alle } t\in \N_0 }. \]
+\end{karte}
+
+\begin{karte}{\(\sigma\)-Algebra der \(\tau\)-Vergangenheit}
+Für eine Stoppzeit \(\tau\) ist \(\F_\tau\) eine \(\sigma\)-Algebra. 
+
+Seien \(\sigma, \tau\) Stoppzeiten mit \(\sigma \leq \tau\). Dann gilt \(\F_\sigma \subset \F_\tau\).
+\end{karte}
+
+\begin{karte}{Messbarkeit bzgl. \(\F_\tau\)}
+Sei \((X_t)\) ein \((\F_t)\)-adaptierter stochastischer Prozess und \(\tau\) eine 
+\((\F_t)\)-Stoppzeit. Dann ist \(X_\tau\) messbar bzgl. \(\F_\tau\).
+\end{karte}
+
+\begin{karte}{Doob's Optional Sampling Theorem}
+Sei \((X_t)\) ein \((\F_t)\)-Martingal und seien \(\tau, \sigma\) beschränkte 
+Stoppzeiten mit \(\sigma \leq \tau\). Dann gilt: 
+\[ \E[X_\tau | \F_\sigma] = X_\sigma \]
+und daher \(\E[X_\tau] = \E[X_\sigma]\). Ist \((X_t)\) ein Sub- oder 
+Supermartingal, dann gelten die entsprechenden Ungleichungen.
+\end{karte}
