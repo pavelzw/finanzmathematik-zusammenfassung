@@ -1,0 +1,67 @@
+\section{Arbitragefreiheit}
+
+\begin{karte}{Martingalmaß}
+Ein Wahrscheinlichkeitsmaß \(\Q\) auf \((\Omega, \F, (\F_t))\) 
+heißt Martingalmaß oder risikoneutrales Wahrscheinlichkeitsmaß, 
+falls die diskontierte Preisprozesse \((\tilde{S}_t^k)\) für alle 
+\(k = 1,\ldots, d\), \((\F_t)\)-Martingale bezüglich \(\Q\) sind.
+
+\[\mathcal{M} := \set{\Q \text{ ist ein Wahrscheinlichkeitsmaß auf \((\Omega, \F): \Q\) ist ein Martingalmaß}}\]
+\[ \mathcal{M}^* := \set{\Q \in \mathcal{M}: \Q(\set{\omega}) > 0 \;\forall \omega: \P(\set{\omega}) > 0}. \]
+\end{karte}
+
+\begin{karte}{Martingalmaß CRR-Modell}
+Im Cox-Ross-Rubinstein-Modell gilt unter (NA): 
+\begin{enumerate}
+    \item \((\tilde{S}_t)\) ist ein \(\Q\)-Martingal, d. h. \(\Q \in \mathcal{M}\).
+    \item \(\Q\) ist das einzige Martingalmaß, d. h. \(\abs{\mathcal{M}} = 1\).
+    \item \(\Q\) ist äquivalent zu \(\P\).
+\end{enumerate}
+\end{karte}
+
+\begin{karte}{Diskontierter Preisprozess als \(\Q\)-Martingal}
+Sei \(\Q \in \mathcal{M}\) und \(\varphi = (\alpha, \beta)\) eine 
+selbstfinanzierende Handelsstrategie. Dann ist der diskontierte 
+Vermögensprozess \(\left( \frac{V_t^\varphi}{B_t} \right)\) ein 
+\(\Q\)-Martingal.
+\end{karte}
+
+\begin{karte}{Charakterisierung \(\mathcal{M}\)}
+Sei \(\Q\) ein Wahrscheinlichkeitsmaß auf \((\Omega, \F)\). Dann gilt 
+\begin{enumerate}
+    \item \(\Q \in \mathcal{M} \Leftrightarrow\) für alle \(\alpha \in \mathcal{A}\) 
+    gilt: \(\E[G_T^\alpha] = 0\).
+    \item \(\mathcal{M}^* \neq \emptyset \Rightarrow\) (NA).
+\end{enumerate}
+\end{karte}
+
+\begin{karte}{Trennungssatz}
+Sei \(K \subset \R^n\) nichtleer, abgeschlossen und konvex und 
+\(Z\notin K\). Dann gibt es eine lineare Abbildung \(\abb{f}{\R^n}{\R}\) 
+und ein \(\gamma \in \R\), sodass 
+\[ f(x) \leq \gamma \text{ für alle } x\in K \text{ und } f(Z) > \gamma. \]
+\end{karte}
+
+\begin{karte}{Vorbereitung des ersten Hauptsatzes}
+Sei \(\Omega = \set{\omega_1, \ldots, \omega_m}\). Interpretiere 
+eine ZV \(X\) als Vektor, also \((X(\omega_1), \ldots, X(\omega_m)) \in \R^m\).
+Für \(X(\omega_i)\) schreibe auch \(X_i\). Betrachte 
+\[ L := \set{X \in \R^m: X_i = G_T^\alpha(\omega_i)}. \]
+Da \(G_T^\alpha\) linear in \(\alpha\) ist, ist \(L\) ein linearer Unterraum des \(\R^m\), 
+der abgeschlossen und konvex ist. Weiter sei 
+\[ C := \set{ X \in \R^m: X \leq Y \text{ für ein } Y \in L }. \]
+\(C \) ist ein abgeschlossener und konvexer Kegel. Der Markt ist arbitragefrei 
+\(\Leftrightarrow L\cap \R_+^m = \set{0}\) bzw. \(C \cap \R_+^m = \set{0}\).
+
+Für jedes \(Z\notin C\) gibt es ein \(\Q \in \mathcal{M}\) mit \(\E_\Q[Z]>0\).
+\end{karte}
+
+\begin{karte}{Charakterisierung von \(\mathcal{M}\) durch \(L\) und \(C\)}
+Es gilt 
+\[ \Q \in \M \Leftrightarrow \E_\Q[X] = 0 \;\forall X\in L. \]
+\[ \Q\in \M \Leftrightarrow \E_\Q[X] \leq 0 \;\forall X \in C. \]
+\end{karte}
+
+\begin{karte}{Erster Hauptsatz der Preistheorie}
+Der Markt ist arbitragefrei \(\Leftrightarrow \M^* \neq \emptyset\).
+\end{karte}

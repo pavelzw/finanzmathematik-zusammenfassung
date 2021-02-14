@@ -1,0 +1,23 @@
+\section{Vollständigkeit}
+
+\begin{karte}{Zweiter Hauptsatz der Preistheorie}
+Es gelte (NA). Der Markt ist vollständig \(\Leftrightarrow \abs{\M^*} = 1\).
+\end{karte}
+
+\begin{karte}{Alternative Charakterisierung der Vollständigkeit}
+Es gelte (NA) und sei \(\Q\in \M^*\). Der Markt ist vollständig \(\Leftrightarrow\)
+jedes \((\F_t)\)-Martingal \((M_t)\) unter \(\Q\) besitzt eine Darstellung der Form 
+\[ M_t = M_0 + \sum_{n=1}^t \alpha_{n-1} \cdot \Delta \tilde{S}_n \]
+für einen \((\F_t)\)-adaptierten Prozess \((\alpha_t)\).
+\end{karte}
+
+\begin{karte}{Bestimmung von Martingalmaßen}
+\begin{itemize}
+    \item \(\Omega := \Omega_1 \times \cdots \times \Omega_T\).
+    \item \(Y_t(\omega) = y_t\).
+    \item \(h_t = (y_1, \ldots, y_t)\) ist die Vorgeschichte zur Zeit \(t\).
+    \item \(\F_t := \sigma(Y_1, \ldots, Y_t) \Rightarrow S_t = s_t(Y_1, \ldots, Y_t)\).
+\end{itemize}
+Jedes Wahrscheinlichkeitsmaß \(\Q\) auf \((\Omega, \F)\) lässt sich schreiben als: 
+\[ \Q(\set{\omega}) = q_1(y_1) q_2(y_2 | y_1) \cdots q_T(y_T | h_{T-1}). \]
+\end{karte}

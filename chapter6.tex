@@ -1,0 +1,70 @@
+\section{Risikoneutrale Bewertung}
+
+\begin{karte}{Risikoneutrale Bewertung}
+\begin{itemize}
+    \item Voraussetzung: Finanzmarkt ist arbitragefrei.
+    \item \(\F_0 = \set{\emptyset, \Omega}\).
+    \item \(\F_T = \F =\) Potenzmenge von \(\Omega\).
+    \item Preis \(\pi(H)\) zur Zeit \(t=0\) eines erreichbaren Zahlungsanspruchs \(H\) 
+    ist gerade das Anfangsvermögen einer Hedging-Strategie. 
+    \item Ist \(\varphi\) eine Hedging-Strategie für \(H\), so gilt 
+    \(V_t^\varphi=\) Preis von \(H\) zur Zeit \(t\).
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Eindeutigkeit des Preises}
+Für jeden erreichbaren Zahlungsanspruch \(H\) 
+und für selbstfinanzierende Strategien \(\varphi\) und \(\psi\) 
+mit \(V_T^\varphi = H = V_T^\psi\) gilt: 
+\[ V_t^\varphi = V_t^\psi. \]
+\(\pi_t(H) := V_t^\varphi\) ist also der (eindeutige) Preis des 
+Zahlungsanspruchs \(H\) zur Zeit \(t\).
+\end{karte}
+
+\begin{karte}{Risikoneutrale Bewertungsformel}
+Sei \(H\) ein erreichbarer Zahlungsanspruch. Dann gilt für den Preis von \(H\)
+zur Zeit \(t\) 
+\[ \pi_t(H) = B_t \E_\Q\left[ \frac{H}{B_T} | \F_t \right] \]
+für alle \(\Q\in \M^*\). Insbesondere ist \(\pi_t(H)\) unabhängig von der Wahl von 
+\(\Q\in \M^*\).
+\end{karte}
+
+\begin{karte}{Preis zur Zeit \(t=0\)}
+Sei \(H\) ein erreichbarer Zahlungsanspruch. Dann gilt für den Preis von \(H\)
+zur Zeit \(t=0\):
+\[ \pi(H) = \E_\Q \left[ \frac{H}{B_t} \right] \]
+für alle \(\Q\in\M^*\).
+\end{karte}
+
+\begin{karte}{Put-Call-Parität}
+Es gilt die sogenannte Put-Call-Parität: 
+\[ C + KB_T^{-1} = P + S_0. \]
+Allgemeiner gilt zur Zeit \(t\):
+\[ C_t + K \frac{B_t}{B_T} = P_t + S_t. \]
+\end{karte}
+
+\begin{karte}{Symmetrische Irrfahrt}
+Eine Folge von ZV \((Z_t)\) mit \(Z_0 := 0\) und \(Z_t := \sum_{k=1}^t Y_k\), 
+wobei \(Y_1, \ldots\) u.i.v. ZV sind mit \(\P(Y_k = 1) = \P(Y_k = -1) = \frac{1}{2}\) heißt symmetrische Irrfahrt auf \(\Z\).
+
+Für \(T\in \N\) und \(b\in\N\) mit \(-T\leq b\leq T\) gilt: 
+\[ \P(Z_T = b) = \begin{cases}
+    (\frac{1}{2})^T \binom{T}{(T+b)/2}, &\text{ falls} T, b \text{ die gleiche Parität besitzen.} \\
+    0, & \text{ sonst}.
+\end{cases} \]
+Gleiche Parität bedeutet, dass beide Zahlen gerade oder beide ungerade sind.
+\end{karte}
+
+\begin{karte}{Spiegelungsprinzip}
+Sei \(M_t := \max\set{ Z_0, \ldots, Z_t }\) das laufende Maximum. 
+
+Für \(k\in\N\) und \(m\in\N_0\) gilt: 
+\[ \P(M_T\geq k, Z_T = k-m) = \P(Z_T = k+m). \]
+\end{karte}
+
+\begin{karte}{Hilfslemma für Irrfahrten}
+Unter \(\Q\) gilt für die Irrfahrt \((Z_t)\) auf \(\Z\) und \(M_t := \max\set{Z_0,\ldots, Z_t}\) 
+für \(k\in\N\) und \(m\in\N_0\), falls \(T\) und \(k+m\) die gleiche Parität besitzen, 
+\[ \Q(M_T \geq k, Z_T = k-m) = \binom{T}{(T+k+m)/2} q^{(T+k-m)/2} (1-q)^{(T-k+m)/2}, \]
+\[ \Q(M_T = k, Z_T = k-m) = \binom{T+1}{(T-k-m)/2} \frac{k+m+1}{T+1} q^{(T+k-m)/2} (1-q)^{(T-k+m)/2}. \]
+\end{karte}
