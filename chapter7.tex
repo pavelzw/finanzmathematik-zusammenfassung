@@ -1,0 +1,76 @@
+\section{Amerikanische Optionen}
+
+\begin{karte}{Modellannahmen}
+\begin{itemize}
+    \item Der Finanzmarkt sei arbitragefrei und vollständig. 
+    \item Eine amerikanische Option wird repräsentiert durch einen \((\F_t)\)-adaptierten 
+    stochastischen Prozess \((H_t)\).
+    \item Ein Ausübungszeitpunkt wird durch eine \((\F_t)\)-Stoppzeit 
+    \(\abb{\tau}{\Omega}{\set{0,\ldots, T}}\) beschrieben. 
+    \item Verwendet der Käufer der Option den Ausübungszeitpunkt \(\tau\), dann ist 
+    \[ H_\tau(\omega) = \sum_{t=0}^T H_t(\omega) 1_{\set{\tau(\omega) = t}} = H_{\tau(\omega)}(\omega) \]
+    die Auszahlung der Option.
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Amerikanische Put-Option, Bermuda-Option}
+Amerikanische Put-Option:
+\begin{itemize}
+    \item Es ist \(H_t = (K - S_t)^+\). 
+    \item Möglicher Ausübungszeitpunkt \(\tau = \min \set{t \in \N: S_t \leq K} \wedge T\).
+\end{itemize}
+
+Bermuda-Option:
+\begin{itemize}
+    \item Bei einer Bermuda-Option hat der Käufer das Recht, zu bestimmten Zeitpunkten 
+    \(\mathcal{T} := \set{t_1, \ldots, t_k} \subset \set{0, \ldots, T}\) auszuüben.
+    \item Ist \(\mathcal{T} = \set{T}\), dann ist es eine europäische Option. 
+    \item Ist \(\mathcal{T} = \set{0,\ldots, T}\), dann ist es eine amerikanische Option. 
+    \item Definiert man die Wertpapierkurse nur auf \(\mathcal{T}\), so kann man die Bewertung auf 
+    die amerikanische Option zurückführen.
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Preis einer amerikanischen Option}
+\[ \pi^A(H) := \sup_{\tau \leq T} \E_\Q[\frac{H_\tau}{B_\tau}],\]
+wobei das Supremum über alle Stoppzeiten \(\tau\) mit \(\tau \leq T\) genommen wird.
+\end{karte}
+
+\begin{karte}{Stoppprobleme}
+Sei \((X_t)\) ein \((\F_t)\)-adaptierter stochastischer Prozess mit \(\E \abs{X_t} < \infty \forall t\in\N_0\).
+
+Zu lösen ist das Stoppproblem 
+\[ \sup_{\tau \leq T} \E[X_\tau], \]
+wobei das Supremum über alle \((\F_t)\)-Stoppzeiten \(\tau\) genommen wird 
+mit \(\P(\tau \leq T) = 1\).
+\end{karte}
+
+\begin{karte}{Snell-Einhüllende}
+Ein stochastischer Prozess \((Z_t)\), definiert durch 
+\begin{align*}
+    Z_T &:= X_T, \\
+    Z_t &:= \max\set{ X_t, \E[Z_{t+1} | \F_t], }
+\end{align*}
+heißt Snell-Einhüllende von \((X_t)\).
+
+Die Snell-Einhüllende \((Z_t)\) von \((X_t)\) ist ein Supermartingal und das kleinste 
+Supermartingal, welches \((X_t)\) dominiert, d. h. \(Z_t \geq X_t\) für alle \(t=0,\ldots, T\).
+
+Sei \(\tau^* := \inf \set{t\geq 0: Z_t = X_t}\). Dann ist 
+\(\tau^* \) eine Stoppzeit, \(\tau^* \leq T\) und der gestoppte Prozess 
+\((Z_{t\wedge \tau^*})\) ist ein Martingal.
+\end{karte}
+
+\begin{karte}{Lösung Stoppproblem}
+Die Stoppzeit \(\tau^* = \inf \set{t\geq 0: Z_t = X_t}\) löst das Stoppproblem 
+und es ist 
+\[ Z_0 = \E[X_{\tau^*}] = \sup_{\tau \leq T} \E[X_\tau]. \]
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}

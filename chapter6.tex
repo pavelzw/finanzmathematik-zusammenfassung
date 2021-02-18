@@ -68,3 +68,48 @@ für \(k\in\N\) und \(m\in\N_0\), falls \(T\) und \(k+m\) die gleiche Parität b
 \[ \Q(M_T \geq k, Z_T = k-m) = \binom{T}{(T+k+m)/2} q^{(T+k-m)/2} (1-q)^{(T-k+m)/2}, \]
 \[ \Q(M_T = k, Z_T = k-m) = \binom{T+1}{(T-k-m)/2} \frac{k+m+1}{T+1} q^{(T+k-m)/2} (1-q)^{(T-k+m)/2}. \]
 \end{karte}
+
+\subsection{Bewertung unvollst. Märkte}
+
+\begin{karte}{Superhedging}
+Sei \(H\) ein Zahlungsanspruch. Eine selbstfinanzierende Handelsstrategie 
+\(\varphi\) heißt Superhedging-Strategie für \(H\), falls \(V_T^\varphi \geq H\) gilt.
+\end{karte}
+
+\begin{karte}{\(\pi_-\) und \(\pi_+\)}
+Sei \(\pi_+(H) := \inf \set{V_0^\varphi: \varphi \text{ Superhedging-Strategie für } H}\), 
+und \(\pi_-(H) := \sup \set{ V_0^\varphi: \varphi \text{ selbstfinanzierend mit } V_T^\varphi \leq H }\).
+
+Es gilt 
+\[ \pi_-(H) \leq \inf_{\Q\in\M} \E_\Q[\frac{H}{B_t}] \leq \sup_{\Q\in\M} \E_\Q [\frac{H}{B_T}] 
+\leq \pi_+(H). \]
+\end{karte}
+
+\begin{karte}{Charakterisierung erreichbarer Zahlungsansprüche}
+Ein Zahlungsanspruch \(H\) ist erreichbar \(\Leftrightarrow \pi_-(H) = \pi_+(H)\).
+
+Weiter sind äquivalent: 
+\begin{enumerate}
+    \item \(H\) ist erreichbar.
+    \item \(\E_\Q[\frac{H}{B_T}]\) ist konstant für alle \(\Q\in \M^*\).
+    \item \(\E_\Q[\frac{H}{B_T}]\) ist konstant für alle \(\Q\in\M^*\).
+\end{enumerate}
+\end{karte}
+
+\begin{karte}{Darstellung der Preisschranken}
+Sei \(H\) ein beliebiger Zahlungsanspruch. 
+Es gilt folgende duale Darstellung von \(\pi_+(H)\) und \(\pi_-(H)\): 
+\[ \pi_+(H) = \max_{\Q\in\M} \E_\Q[\frac{H}{B_T}] = \sup_{\Q\in\M^*}\E_\Q[\frac{H}{B_T}] \]
+\[ \pi_-(H) = \min_{\Q\in\M} \E_\Q[\frac{H}{B_T}] = \inf_{\Q\in\M^*}\E_\Q[\frac{H}{B_T}] \]
+
+\[ \pi_+(H) = \min\set{ a: \text{Es gibt ein \(\alpha\in \A\) mit } a + G_T^\alpha \geq \frac{H}{B_T} }. \]
+\[ \pi_-(H) = \min\set{ a: \text{Es gibt ein \(\alpha\in \A\) mit } a + G_T^\alpha \leq \frac{H}{B_T} }. \]
+\end{karte}
+
+\begin{karte}{Eigenschaft \(C\)}
+Betrachte 
+\[ L :=\set{ X\in\R^m: X_i = G_T^\alpha(\omega_i) \text{ für } i = 1,\ldots, m \text{ und } \alpha\in \A } \]
+und 
+\[ C := \set{ X \in \R^m: X \leq Y \text{ für ein } Y \in L }. \]
+Für jedes \(Z\in C\) gibt es ein \(\Q\in\M\) mit \(\E_\Q[Z] > 0\).
+\end{karte}
