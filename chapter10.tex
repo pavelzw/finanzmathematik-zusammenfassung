@@ -1,0 +1,111 @@
+\section{\(\E\)-\(Var\)-Portfolios}
+
+\begin{karte}{Notationen und Annahmen}
+\begin{itemize}
+    \item \(d\) risikobehaftete Wertpapiere mit \(S_0 = (S_0^1, \ldots, S_0^d)\).
+    \item Zufällige Renditen \(R_T^k := \frac{S_T^k}{S_0^k} - 1\).
+    \item \(\E[R_T^k] = m_k\).
+    \item \(Cov(R_T^k, R_T^j) = \sigma_{kj}\)
+    \item \(m = (m_1, \ldots, m_d)\) und \(e = (1, \ldots, 1)\) seien linear unabhängig.
+    \item \(\Sigma = (\sigma_{kj})\) sei positiv definit.
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Portfolio, Portfoliorendite}
+Gegeben sei ein Investor mit Anfangsvermögen \(x_0 > 0\), 
+der \(\alpha_0^k\) Stück des Wertpapiers \(k = 1, \ldots, d\), 
+wobei 
+\[ \sum_{k=1}^d \alpha_0^k S_0^k = x_0. \text{ (Budgetungleichung)} \]
+Dann bezeichnet \(\pi = (\pi_1, \ldots, \pi_d)\) mit 
+\[ \pi_k := \frac{\alpha_0^k S_0^k}{x_0}, k=1,\ldots, d \]
+das Portfolio und 
+\[ R^\pi := \sum_{k=1}^d \pi_k R_T^k \]
+die Portfoliorendite.
+\end{karte}
+
+\begin{karte}{Erwartungswert und Varianz der Portfoliorendite}
+Es gilt: 
+\[ \sum_{k=1}^d \pi_k = \frac{1}{x_0} \sum_{k=1}^d \alpha_0^k S_0^k = 1. \]
+Erwartungswert und Varianz der Portfoliorendite sind 
+\[ \E[R^\pi] = \sum_{k=1}^d \pi_k m_k =: m(\pi), Var(R^\pi) = \sum_{k=1}^d \sum_{j=1}^d \pi_k \sigma_{kj} \pi_j =: \sigma^2(\pi). \]
+Sei \(V_T^\varphi = \sum_{k=1}^d \alpha_0^k S_T^k\). Dann ist 
+\[ R^\pi = \sum_{k=1}^d \pi_k R_T^k = \sum_{k=1}^d \frac{\alpha_0^k S_0^k}{x_0} \left( \frac{S_T^k}{S_0^k} - 1 \right) = \frac{V_T^\varphi}{x_0} - 1. \]
+\end{karte}
+
+\subsection{Markowitz de Finetti}
+
+\begin{karte}{Grenzportfolio}
+Ein Portfolio heißt Grenzportfolio, wenn es unter allen Portfolios mit gleicher Rendite 
+die kleinste Varianz hat. 
+
+Die Menge aller Grenzportfolios wird Portfoliogrenze genannt.
+\end{karte}
+
+\begin{karte}{Optimierungsproblem bei vorgegebener Portfoliorendite}
+Sei \(m_p\) die (vorgegebene) Portfoliorendite, so ist \(\pi^*\) ein Grenzportfolio 
+\(\Leftrightarrow \pi^*\) ist eine Lösung von: 
+\[ (P): \min \frac{1}{2} Var(R^\pi) \text{ s.t. } \E[R^\pi] = m_p, \pi \cdot e = 1 \]
+bzw.
+\[ (P): \min \frac{1}{2} \pi^T \Sigma \pi \text{ s.t. } \pi \cdot m = m_p, \pi \cdot e = 1. \]
+\end{karte}
+
+\begin{karte}{Two Fund-Separation}
+Für das optimale Portfolio von \((P)\) gilt 
+\[ \pi^* := \frac{C m_p - A}{D} \Sigma^{-1} m + \frac{B - A m_p}{D} \Sigma^{-1} e. \]
+Das kann man auch schreiben als 
+\begin{align*}
+    \pi^* &= g + h m_p, \text{ mit } \\
+    g &:= \frac{1}{D} (-A \Sigma^{-1} m + B \Sigma^{-1} e), \\
+    h &:= \frac{1}{D} ( C \Sigma^{-1} m - A \Sigma^{-1}e).
+\end{align*}
+Für \(m_p = 0\) ist \(\pi^* = g\). Für \(m_p = 1\) ist \(\pi^* = g + h\). Für beliebiges \(m_p\) gilt 
+\[ \pi^* = g+h m_p = (1-m_p) g + m_p (g+h). \text{ Two-Fund Separation} \]
+\end{karte}
+
+\begin{karte}{Minimale Varianz von \(\pi^*\)}
+Einsetzen von \(\pi^*\) in die Varianz liefert 
+\[ \sigma_M^2(m_p) := {\pi^*}^T\Sigma \pi^* = \frac{B}{D} - 2m_p \frac{A}{D} + m_p^2 \frac{C}{D} 
+= \frac{C}{D} (m_p - \frac{A}{C})^2 + \frac{1}{C}. \]
+Die globale minimale Varianz \(\frac{1}{C}\) wird bei \(m_p = \frac{A}{C}\) erricht.
+\end{karte}
+
+\begin{karte}{Grenzportfolios}
+Seien \(\Sigma\) positiv definit und \(m\) und \(e\) linear unabhängig. Dann ist \(\pi\) 
+ein Grenzportfolio \(\Leftrightarrow\)
+\[ \sigma_M^2(m_p) := \pi^T \Sigma \pi = \frac{C}{D} (m_p - \frac{A}{C})^2 + \frac{1}{C}, \]
+wobei \(A = m^T \Sigma^{-1} e, B = m^T \Sigma^{-1} m, C = e^T \Sigma^{-1} e, D = BC - A^2\). 
+Die Hyperbel in der \((\sigma_m, m_p)\)-Ebene ist die Portfoliogrenze. Effiziente Portfolios 
+sind Portfolios auf der Portfoliogrenze mit erwarteter Rendite \(m_p > \frac{A}{C}\).
+\end{karte}
+
+\begin{karte}{MV-Relation}
+Die zugehörige Relation auf der Menge der Renditeverteilungen: 
+\[ \mu \succeq_{MV} \nu :\Leftrightarrow m(\mu) \geq m(\nu) \text{ und } Var(\mu) \leq Var(\nu), \]
+wobei 
+\begin{align*}
+    m(\mu) &:= \int x \mu(dx), \\
+    Var(\mu) &:= \int (x - m(\mu))^2 \mu(dx) = \int x^2 \mu(dx) - m(\mu)^2.
+\end{align*}
+Falls \(\mu\) und \(\nu\) Normalverteilungen sind, dann sind \(\succeq_{MV}\) 
+und \(\succeq_{SSD}\) äquivalent sind. Das gilt allerdings nicht immer.
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}

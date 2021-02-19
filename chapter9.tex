@@ -1,0 +1,177 @@
+\section{Portfoliooptimierung}
+
+\subsection{Martingalmethode}
+
+\begin{karte}{Voraussetzungen Martingalmethode}
+Endlicher, arbitragefreier, vollständiger Finanzmarkt. 
+Es sei \(\Omega = \set{\omega_1, \ldots, \omega_m}\) und \(\F_T\) die Potenzmenge 
+von \(\Omega\).
+
+Sei \(\abb{U}{\R}{\R}\) eine Nutzenfunktion mit \(U\in C^1\) und 
+\[ \limesx{x}{-\infty} U'(x) = +\infty, \limesx{x}{\infty} U'(x) = 0. \text{(Inada-Bedingung)}\]
+Ist \(U\) nur auf \((0,\infty)\) definiert, fordern wir \(\limesx{x}{0}U'(x) = +\infty\).
+\end{karte}
+
+\begin{karte}{Endnutzenmaximierung}
+Sei \(x_0 > 0\) ein gegebenes Anfangsvermögen. 
+
+\((P): \max \E[U(V_T^\varphi)]\) s.t. \(V_0^\varphi \leq x_0\).
+\end{karte}
+
+\begin{karte}{Martingalmethode}
+Zerlege das Optimierungsproblem in 
+
+\(\varphi \mapsto V_T^\varphi\), d. h. der Handelsstrategie wird eine ZV zugeordnet, die das 
+Endvermögen beschreibt. 
+
+\(V_T^\varphi \mapsto \E[U(V_T^\varphi)]\), d. h. der ZV wird der erwartete Nutzen, 
+also eine reelle Zahl, zugeordnet.
+
+Vorgehen:
+\begin{enumerate}
+    \item Löse 
+    \[ (\tilde{P}): \max \E[U(X)] \text{ s.t. } X \in \mathcal{X}, \]
+    wobei \(\mathcal{X} := \set{X: X \text{ ist } \F_T \text{-messbar, } \E_\Q[\frac{X}{B_T}] = x_0}\).
+    \item Darstellungsproblem: 
+    Sei \(X^*\) eine Lösung von \((\tilde{P})\). Bestimme eine selbstfinanz. \(\varphi^*\) so, dass 
+    \(V_T^{\varphi^*} = X^*\). Dann ist \(V_0^{\varphi^*} = x_0\) und \(\varphi^*\) 
+    eine optimale Lösung von \((P)\).
+\end{enumerate}
+\end{karte}
+
+\begin{karte}{Konkave Optimierung}
+\((P): \max f(x)\) s.t. \(h_j(x) = 0, j=1,\ldots, q\). Dabei ist \(\abb{f}{\R^n}{\R}\) 
+konkav und \(\abb{h_j}{\R^n}{\R}\) linear. Lagrange-Funktion: 
+\[ L(x,y) = f(x) + \sum_{j=1}^q y_j h_j(x). \]
+\end{karte}
+
+\begin{karte}{Karush-Kuhn-Tucker-Punkt}
+Ein Punkt \((x,y) \in \R^{n+q}\), der die Karush-Kuhn-Tucker-Bedingungen 
+\begin{align*}
+    0 &= \frac{d}{dx} f(x) + \sum_{j=1}^q y_j \frac{d}{dx} h_j(x), \\
+    0 &= h_j(x), j = 1,\ldots, q
+\end{align*}
+erfüllt, wird Karush-Kuhn-Tucker-Punkt genannt.
+\end{karte}
+
+\begin{karte}{Karush-Kuhn-Tucker-Bedingungen}
+Ist \((x^*, y^*) \in \R^{n+q}\) ein Karush-Kuhn-Tucker-Punkt eines 
+differenzierbaren, konkaven Optimierungsproblems, so ist \(x^*\) ein 
+globales Maximum von \((P)\).
+\end{karte}
+
+\begin{karte}{Karush-Kuhn-Tucker-Punkt bestimmen}
+Wir bestimmen jetzt einen Karush-Kuhn-Tucker-Punkt \(X^*\) der 
+Lagrange-Funktion zusammen mit einem Lagrange-Multiplikator \(y^*\): 
+\begin{enumerate}
+    \item \(\frac{d}{dX} L(X^*, y^*) = 0\), 
+    \item \(\E_\Q[\frac{X^*}{B_T}] - x_0 = 0\).
+\end{enumerate}
+Also 
+\[ \frac{\partial}{\partial X_i} L(X^*, y^*) = \P(\set{\omega_i}) (U'(X_i^*) - y^* Z_i) = 0. \]
+Es folgt \(U'(X^*) = y^* Z\).
+\end{karte}
+
+\begin{karte}{Lösung des Portfolioproblems}
+Sei \( I := (U')^{-1}: (0,\infty)\rightarrow\R\). Da \(U'\neq 0\), 
+muss \(y^* > 0\) sein und 
+\[ X^* = I(y^*Z). \]
+\(X^*\) ist eindeutig. Weiter muss \(y^*\) so gewählt werden, dass 
+\[ \E_\Q[\frac{X^*}{B_T}] = x_0. \]
+Dies ist möglich, da \(y \mapsto I(yZ)\) wohldefiniert, stetig und fallend ist mit 
+\[ \limesx{y}{0} \E[Z I(yZ)] = +\infty, \limesx{y}{\infty} \E[Z I(yZ)] = -\infty. \]
+
+Zu \(X^* := I(y^* Z)\) existiert eine Hedging-Strategie \(\varphi^*\) 
+und \(\varphi^*\) ist eine optimale Lösung des Portfolioproblems \((P)\).
+\end{karte}
+
+\subsection{Dynamische Optimierung}
+
+\begin{karte}{\(\phi\)}
+Wir betrachten einen endlichen, arbitragefreien Finanzmarkt. Die Preismodelle 
+der risikobehafteten Wertpapiere sind Markovsch, \(\F_t := \F_t^S\).
+
+Sei \(\varphi = (\alpha, \beta)\) eine selbstfinanzierende Handelsstrategie. 
+Wir definieren \(\phi = (\phi_t^0, \phi_t) = (\phi_t^0, \phi_t^1, \ldots, \phi_t^d)\) 
+für \(t=0,\ldots, T-1\) durch 
+\begin{align*}
+    \phi_t^0 &:= \beta_t B_t,\\
+    \phi_t^k &:= \alpha_t S_t^k, k = 1,\ldots, d.
+\end{align*}
+\(\phi_t^k\) ist der Betrag, der zur Zeit \(t\) in das Wertpapier \(k\) investiert wird.
+\end{karte}
+
+\begin{karte}{\(V_t^\phi\) und \(R_t\)}
+\(V_t^\phi = \phi_t^0 + \cdots + \phi_t^d\) ist der Portfoliowert 
+der Strategie \(\phi\) zur Zeit \(t\).
+
+Weiter sei 
+\[ \frac{B_{t+1}}{B_t} =: 1 + r_{t+1}, \frac{S_{t+1}^k}{S_t^k} =: \tilde{R}_{t+1}^k, \frac{\tilde{R}_t^k}{1 + r_t} - 1 =: R_t^k. \]
+\(R_t := (R_t^1, \ldots, R_t^d)^T\) und \(e = (1, \ldots, 1)^T\). 
+
+\(\phi\) ist selbstfinanzierende \(\Leftrightarrow \beta_t B_t + \alpha_t \cdot S_t 
+= \beta_{t-1}B_t + \alpha_{t-1} \cdot S_t\), d. h. 
+\[ V_t^\phi = \phi_t^0 + \phi_t \cdot e = \phi_{t-1}^0 ( 1 + r_t) + \phi_{t-1} \cdot \tilde{R}_t. \]
+\end{karte}
+
+\begin{karte}{Vermögensprozess Rekursionsformel}
+Es gilt folgende Rekursionsformel für das Vermögen 
+\[ V_t^\phi = (1+r_t)(V_{t-1}^\phi + \phi_{t-1} \cdot R_t). \]
+\end{karte}
+
+\begin{karte}{Charakterisierung (NA)}
+Im Falle \(T=1\) erhalten wir 
+\[ V_t^\phi = (1+r)(x_0 + a \cdot R), \]
+wobei wir \(r := r_1, R := R_1, x_0 := V_0^\phi\) und \(a := \phi_0\) setzen.
+
+Sei \(L\) der kleinste lineare Unterraum des \(\R^d\) mit 
+\(\P(R \in L) = 1\).
+
+Folgende Aussagen sind äquivalent: 
+\begin{itemize}
+    \item Es gilt (NA).
+    \item \(\forall a \in \R^d\) mit \(\P(a\cdot R \geq 0) = 1\) folgt \(\P(a \cdot R = 0) = 1\).
+    \item \(\forall a \in L, a\neq 0\) gilt \(\P(a \cdot R < 0) > 0\).
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Portfolioproblem Lösung}
+Sei \(\abb{U}{\R}{\R}\) eine Nutzenfunktion. 
+Wir betrachten jetzt das folgende Portfolioproblem für \(x_0 > 0\)
+\[ \max \E[U((1+r)(x_0 + a \cdot R))] \text{ s.t. } a\in \R^d. \]
+
+Sei \(\abb{U}{\R}{\R}\) eine nach oben beschränkte Nutzenfunktion. Dann gilt 
+\[ (NA) \Leftrightarrow \text{ Das Portfolioproblem besitzt eine Lösung.} \]
+\end{karte}
+
+\begin{karte}{Investitionspolitik}
+Eine Investitionspolitik \(\pi = (f_0, \ldots, f_{T-1})\) ist eine Folge 
+von Entscheidungsregeln \(\abb{f_t}{\R}{\R^d}\), wobei 
+\(f_t = f_t(x) = (f_t^1(x), \ldots, f_t^d(x))\) ist. 
+Dabei gibt \(f_t^k(x)\) den Betrag an, der zur Zeit \(t\) in das 
+\(k\)-te risikobehaftete Wertpapier investiert wird, in Abhängigkeit vom 
+Vermögen zur Zeit \(t\).
+\end{karte}
+
+\begin{karte}{Wertfunktion}
+Sei \(\abb{U}{\R}{\R}\) eine nach oben beschränkte Nutzenfunktion. Betrachte: 
+\((P): \max \E[U(V_T^\pi)]\) s.t. \(V_0^\pi = x_0, \pi\) Investitionspolitik.
+Dabei ist \(x_0 > 0\) ein gegebenes Anfangsvermögen.
+
+Sei \(J_T(x) := U(x)\), und für \(t=0,\ldots, T-1\) und \(x\in\R\) sei 
+\[ J_t(x) := \sup_\pi \E[U(V_T^\pi) | V_t^\pi = x]. \]
+\(J_t\) nennt man Wertfunktion zur Zeit \(t\). Falls 
+\[ \E[U(V_T^{\pi^*}) | V_0^{\pi^*} = x_0] = J_0(x_0), \]
+dann ist \(\pi^* = (f_0^*, \ldots, ,f_{T-1}^*)\) eine optimale Investitionspolitik für 
+das Problem \((P)\).
+\end{karte}
+
+\begin{karte}{Wertfunktion bei (NA)}
+Es gelte (NA). Dann gilt für \(t=T-1, \ldots, 0\)
+\begin{align*}
+    J_T(x) &= U(x), \\
+    J_t(x) &= \sup_f \E[ J_{t+1}((1+r_{t+1}) (x + f(x) \cdot R_{t+1})) ], x\in \R.
+\end{align*}
+Außerdem gibt es Entscheidungsregeln \(f_t^*\), die das Supremum jeweils annehmen, und 
+\(\pi^* = (f_0^*, \ldots, f_{T-1}^*)\) ist eine optimale Investitionspolitik.
+\end{karte}

@@ -65,3 +65,140 @@ Eine Präferenzrelation \(\succ\) auf \(\mathcal{P}\) heißt risikoavers, falls
 Eine Präferenzrelation \(\succ\) auf \(\mathcal{P}\) mit Von-Neumann-Morgenstern-Repräsentation 
 \(U(\mu) := \int U(x) \mu(dx)\) ist risikoavers \(\Leftrightarrow U\) ist streng konkav.
 \end{karte}
+
+\begin{karte}{Nutzenfunktion}
+Eine Funktion \(\abb{U}{S}{\R}\) heißt Nutzenfunktion, falls sie streng wachsend, 
+streng konkav und stetig auf \(S\) ist.
+
+Beispiele: 
+\begin{itemize}
+    \item \(U(x) = -\exp(-\gamma x), \gamma > 0, S := \R\).
+    \item \(U(x) = \frac{x^\gamma}{\gamma}, \gamma < 1, S := (0,\infty)\).
+    \item \(U(x) = \log x, S := (0,\infty)\).
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Sicherheitsäquivalent, Risikoprämie}
+Sei \(U\) eine Nutzenfunktion. 
+
+Das Sicherheitsäquivalent \(c(\mu)\) einer Lotterie \(\mu\in \mathcal{P}\) ist gegeben durch 
+\[ U(c(\mu)) = \int U d\mu, \text{ d. h. } c(\mu) = U^{-1}(\int U d\mu). \]
+
+Die Risikoprämie von \(\mu\) ist definiert als 
+\[ p(\mu) := m(\mu) - c(\mu). \]
+Da \(U(m(\mu)) = U(\delta_{m(\mu)}) \geq U(\mu) = U(c(\mu))\) gilt \(c(\mu) \leq m(\mu)\) und 
+\[ c(\mu) < m(\mu) \Leftrightarrow \mu \neq \delta_{m(\mu)}. \]
+\end{karte}
+
+\begin{karte}{Prämie und Arrow-Pratt-Risikoaversionskoeffizient}
+Sei \(U\in C^2(S), Z\) ein Risiko und \(x>0\) gegeben. Sei 
+\(p(x,Z)\) so, dass 
+\[ U(x+\E Z - p(x,Z)) = \E[U(x+Z)]. \]
+Sei jetzt \(\E Z = 0\) und \(Var(Z) = \sigma^2\). Taylor liefert: 
+\(U(x-p) = U(x) - p U'(x) + O(p^2)\), auf der rechten Seite: 
+\[ \E[U(x+Z)] = \E[U(x)+Z U'(x) + Z^2/2 U''(x) + O(Z^3)] = U(x) + \sigma^2/2 U''(x) + o(\sigma^2). \]
+Setzen wir nun die beiden Ausdrücke gleich, erhalten wir für die Prämie 
+\[ p(x,Z) = \frac{1}{2} \sigma^2 A(x) + o(\sigma^2), \]
+wobei 
+\[ A(x) = \frac{-U''(x)}{U'(x)} \] 
+den absoluten Arrow-Pratt-Risikoaversionskoeffizienten bezeichnet.
+
+Falls \(A(x)\) konstant ist, dann wird \(U\) als CARA-Nutzenfunktion (constant absolute risk aversion)
+bezeichnet. Ein Beispiel ist \(U(x) = -e^{-\gamma x}\).
+\end{karte}
+
+\begin{karte}{Relative Resikoaversion}
+Sei \(\tilde{p}(x,Z)\) eine proportionale Risikoprämie, d. h.: 
+\[ \E[U(xZ)] = U(\E[xZ] - x\tilde{p}(x,Z)). \]
+Geht man wie beim absoluten Arrow-Pratt-Risikoaversionskoeffizienten vor, so folgt 
+\[ \tilde{p}(x,Z) = \frac{1}{2} \sigma^2 R(x) + o(\sigma^2), \]
+wobei \(R(x) := xA(x)\) den relativen Arrow-Pratt-Risikoaversionskoeffizienten bezeichnet.
+
+Falls \(R(x)\) konstant ist, heißt \(U\) CRRA-Nutzenfunktion (constant relative risk aversion). 
+Beispiele sind die \(\log\)- und Potenznutzenfunktion.
+\end{karte}
+
+\begin{karte}{HARA-Nutzenfunktion}
+Eine Nutzenfunktion \(\abb{U}{S}{\R}\) heißt HARA-Nutzenfunktion (hyperbolic absolute risk averison), 
+falls \(U\in C^2(\R)\) und für Konstanten \(a,b\) gilt 
+\[ A(x) = \frac{-U''(x)}{U'(x)} = \frac{1}{ax+b} > 0. \]
+\end{karte}
+
+\subsection{Stochastische Dominanz}
+
+\begin{karte}{Stochastische Dominanz erster Ordnung}
+Seien \(\mu, \nu \in \mathcal{P}\). Dann dominiert \(\mu\) das Maß \(\nu\) im Sinne der 
+stochastischen Dominanz erster Ordnung, falls gilt: 
+\[ \int f d\mu \geq \int f d \nu \]
+für alle wachsenden Funktionen \(\abb{f}{S}{\R}\), für die die Erwartungswerte 
+existieren. Bez. \(\mu \succeq_{FSD} \nu\) (FSD=first order stochastic dominance).
+\end{karte}
+
+\begin{karte}{Quantilfunktion, \(\lambda\)-Quantil}
+Die Funktion 
+\[ F^{-1}(\alpha) := \inf \set{ x\in \R: F(x) \geq \alpha }, \alpha \in (0,1) \]
+wird Quantilfunktion der Verteilungsfunktion \(F\) genannt. 
+
+Sei \(\lambda \in (0,1)\). Dann heißt \(q\in \R\) ein \(\lambda\)-Quantil von \(F\), falls gilt: 
+\[ F(q) \geq \lambda \text{ und } F(q-) \leq \lambda, \]
+wobei \(F(q-)\) der linksseitige Grenzwert von \(F\) an der Stelle \(q\) ist.
+
+\begin{enumerate}
+    \item \(F^{-1}\) ist wachsend und linksseitig stetig.
+    \item \(F\) ist stetig \(\Leftrightarrow F^{-1}\) ist streng wachsend. 
+    \item \(F(x) \geq y \Leftrightarrow x \geq F^{-1}(y)\).
+    \item \(F\) stetig \(\Rightarrow F(F^{-1}(x)) = x\).
+\end{enumerate}
+\end{karte}
+
+\begin{karte}{Charakterisierung Verteilungsfunktion durch Quantilfunktion}
+Sei \(X\) eine ZV mit Verteilungsfunktion \(F\) und Quantilfunktion \(F^{-1}\). Weiter 
+sei \(U\sim U(0,1)\). Dann gilt: 
+\begin{itemize}
+    \item \(\P(F^{-1}(U) \leq x) = F(x), x\in \R\), d. h. \(F^{-1}(U) \overset{d}{X}\).
+    \item Ist \(F\) stetig, dann ist \(F(X) \sim U(0,1)\).
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Charakterisierung von FSD}
+Seien \(F_\mu(x), F_\nu(x)\) die Verteilungsfunktionen von \(\mu, \nu\) 
+und \(F_\mu^{-1}(t), F_\nu^{-1}(t)\) die Quantilfunktionen. 
+
+Für \(\mu, \nu \in \mathcal{P}\) sind äquivalent: 
+\begin{itemize}
+    \item \(\mu \succeq_{FSD} \nu\).
+    \item \(F_\mu(x) \leq F_\nu(x)\) für alle \(x\in \R\).
+    \item \(F_{\mu}^{-1}(t) \geq F_\nu^{-1}(t)\) für alle \(t\in (0,1)\).
+    \item Es existieren ZV \(X\) und \(Y\) auf \((\Omega, \mathcal{G}, \P)\) 
+    mit Verteilungen \(\mu\) und \(\nu\), sodass \(X\geq Y \) \(\P\)-f.s. gilt.
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Stochastische Dominanz zweiter Ordnung}
+Seien \(\mu,\nu \in \mathcal{P}\). Dann dominiert \(\mu\) das Maß \(\nu\) 
+im Sinne der stochastischen Dominanz zweiter Ordnung, falls gilt: 
+\[ \int U d\mu \geq \int U d\nu, \]
+für alle Nutzenfunktionen \(U\) für die die Erwartungswerte existieren. 
+Wir schreiben dafür \(\mu \succeq_{SSD} \nu\). 
+\end{karte}
+
+\begin{karte}{Charakterisierung stochastische Dominanz zweiter Ordnung}
+Für beliebige \(\mu, \nu\in \mathcal{P}\) sind die folgenden Aussagen äquivalent: 
+\begin{enumerate}
+    \item \(\mu \succeq_{SSD}\nu\).
+    \item \(\int f d\mu \geq \int f d\nu\) für alle wachsenden, konkaven Funktionen \(f\).
+    \item Für alle \(c\in\R\) gilt \(\int (c-x)^+ \mu(dx) \leq \int (c-x)^+ \nu(dx)\).
+    \item Für die Verteilungsfunktionen \(F_\mu\) und \(F_\nu\) von \(\mu, \nu\) gilt: 
+    \[ \int_{-\infty}^c F_\mu(x) dx \leq \int_{-\infty}^c F_\nu(x) dx, x\in \R. \]
+    \item Für die Quantilfunktionen \(F_\mu^{-1}\) und \(F_\nu^{-1}\) von \(\mu, \nu\) gilt: 
+    \[ \int_0^t F_\mu^{-1}(s) ds \geq \int_0^t F_\nu^{-1}(s) ds, 0<t\leq 1. \]
+    \item Es existieren Zufallsvariablen \(X\) und \(Y\) auf einem Wahrscheinlichkeitsraum \((\Omega, \mathcal{G}, \P)\)
+    mit Verteilungen \(\mu\) und \(\nu\), sodass \(\E[Y|X] \leq X\) \(\P\)-f.s. gilt.
+\end{enumerate}
+\end{karte}
+
+\begin{karte}{Eigenschaften von SSD}
+Sei \(\mu \succeq_{SSD}\nu\). Wähle \(f(x) = x\) als wachsende, konkave Funktion. Dann folgt \(m(\mu) \geq m(\nu)\).
+
+Es gilt: \(\mu \succeq_{FSD} \mu \Rightarrow \mu \succeq_{SSD} \nu\).
+\end{karte}
