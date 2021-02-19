@@ -1,0 +1,67 @@
+\section{Präferenzen}
+
+\subsection{}
+% chapter 8.2
+\subsection{Erwarteter Nutzen}
+
+\begin{karte}{Axiome für Präferenzlotterien 1}
+Betrachte Lotterien \(L\) mit endl. vielen Auszahlungen \(x_1, \ldots, x_n \in \R\) 
+und zugehörigen Wahrscheinlichkeiten \(p_1, \ldots, p_n\). \(L = (x_1, \ldots, x_n; p_1, \ldots, p_n)\).
+\begin{description}
+    \item[Vergleichbarkeit] Für alle \(x_i, x_j \in \R\) gilt: 
+    \[ x_i \succ x_j \Leftrightarrow x_i > x_j, x_j \sim x_i \Leftrightarrow x_i = x_j \]
+    \item[Monotonie] Sei \(L_1 = (x_1, x_2; p, 1-p), L_2 = (x_1, x_2; q, 1-q)\). 
+    \[ x_1 > x_2 \text{ und } p > q \Rightarrow L_1 \succ L_2. \]
+    \item[Transitivität] 
+    \[ L_1 \succ L_2, L_2 \succ L_3 \Rightarrow L_1 \succ L_3. \]
+    \[ L_1 \sim L_2, L_2 \sim L_3 \Rightarrow L_1 \sim L_3. \]
+    \item[Stetigkeit] \[ x_1\succ x_2 \succ x_3 \Rightarrow \exists U(x_2) \in [0,1] \text{ mit } L = (x_1, x_3; U(x_2), 1-U(x_2)) \sim x_2. \]
+\end{description}
+\end{karte}
+
+\begin{karte}{Axiome für Präferenzlotterien 2}
+\begin{description}
+    \item[Austauschbarkeit] Sei \(L_1 = (x_1, x_2, x_3; p_1, p_2, p_3)\). 
+    \[ x_2 \sim L_2 = (x_1, x_3; q_1, q_2) \Rightarrow L_1 \sim (x_1, L_2, x_3; p_1, p_2, p_3) \]
+    \item[Zerlegbarkeit] Sei \(L_i = (x_1, x_2; p_i, 1-p_i)\) (\(i=1,2\)) und \(L = (L_1, L_2; p, 1-p)\), dann gilt: 
+    \[ L \sim \tilde{L}(x_1, x_2; p p_1 + (1-p)p_2, p(1-p_1) + (1-p)(1-p_2)). \]
+\end{description}
+\end{karte}
+
+\begin{karte}{Von-Neumann-Morgenstern-Repräsentation}
+Ein Investor akzeptiere die Axiome 1-6. Angenommen, es gibt zwei Lotterien 
+\(L_1 = (x_1, \ldots, x_n; p_1, \ldots, p_n)\) und \(L_2 = (x_1, \ldots, x_n; q_1, \ldots, q_n)\). 
+Dann gibt es eine wachsende Funktion \(U\), sodass 
+\[ L_1 \succ L_2 \Leftrightarrow \sum_{i=1}^n U(x_i) p_i \geq \sum_{i=1}^n U(x_i) q_i. \]
+
+Die Funktion \(U\) spiegelt also die Präferenz des Investors wider. 
+
+Sie liefert eine numerische Repräsentation der Präferenzrelation \(\succ\) 
+durch den Wert \(\sum_{i=1}^n p_i U(x_i)\), dieser kann als Erwartungswert der Auszahlungen 
+(gewichtet mit \(U\)) interpretiert werden. 
+
+Man bezeichnet \(U\) auch als 
+Von-Neumann-Morgenstern-Repräsentation der Präferenzrelation.
+\end{karte}
+
+\begin{karte}{Allgemeineres Modell}
+Auszahlung ist durch ein Wahrscheinlichkeitsmaß \(\mu\) auf \(S\subset \R\) gegeben. 
+\(S\) ist eine zusammenhängende Borelsche Menge. \(\mathcal{P}\) sei eine Menge von Wahrscheinlichkeitsmaßen 
+auf \(S\) mit: 
+\begin{itemize}
+    \item Für alle \(\mu \in \mathcal{P}\) gilt: \(m(\mu) := \int x \mu(dx) \in \R\). 
+    \item \(\delta_x \in \mathcal{P}\) für alle \(x\in S\), wobei \(\delta_x\) 
+    das Dirac-Maß im Punkt \(x\) ist. 
+    \item Die Menge \(\mathcal{P}\) ist konvex, d. h. \(\mu,\nu \in \mathcal{P}\) und 
+    \(\alpha \in [0,1] \Rightarrow \alpha\mu + (1-\alpha) \nu \in \mathcal{P}\).
+\end{itemize}
+\end{karte}
+
+\begin{karte}{Risikoaversion}
+Eine Präferenzrelation \(\succ\) auf \(\mathcal{P}\) heißt risikoavers, falls 
+\(\delta_{m(\mu)} \succ \mu\) für alle \(\mu \in \mathcal{P}\) mit 
+\(\mu \neq \delta_{m(\mu)}\).
+
+Eine Präferenzrelation \(\succ\) auf \(\mathcal{P}\) mit Von-Neumann-Morgenstern-Repräsentation 
+\(U(\mu) := \int U(x) \mu(dx)\) ist risikoavers \(\Leftrightarrow U\) ist streng konkav.
+\end{karte}

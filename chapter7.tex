@@ -31,11 +31,6 @@ Bermuda-Option:
 \end{itemize}
 \end{karte}
 
-\begin{karte}{Preis einer amerikanischen Option}
-\[ \pi^A(H) := \sup_{\tau \leq T} \E_\Q[\frac{H_\tau}{B_\tau}],\]
-wobei das Supremum über alle Stoppzeiten \(\tau\) mit \(\tau \leq T\) genommen wird.
-\end{karte}
-
 \begin{karte}{Stoppprobleme}
 Sei \((X_t)\) ein \((\F_t)\)-adaptierter stochastischer Prozess mit \(\E \abs{X_t} < \infty \forall t\in\N_0\).
 
@@ -67,10 +62,124 @@ und es ist
 \[ Z_0 = \E[X_{\tau^*}] = \sup_{\tau \leq T} \E[X_\tau]. \]
 \end{karte}
 
-\begin{karte}{}
+\begin{karte}{Preis einer amerikanischen Option}
+\[ \pi^A(H) := \sup_{\tau \leq T} \E_\Q[\frac{H_\tau}{B_\tau}],\]
+wobei das Supremum über alle Stoppzeiten \(\tau\) mit \(\tau \leq T\) genommen wird.
 
+Sei \((Z_t)\) die Snell-Einhüllende von \((H_t B_t^{-1})\) und 
+\[ \tau^* = \inf \set{t\geq 0: Z_t = \frac{H_t}{B_t}}. \]
+Dann ist der Preis einer amerikanischen Option gegeben durch 
+\[ \pi^A(H) = Z_0 = \sup_{\tau \leq T} \E_\Q [\frac{H_\tau}{B_\tau}] \]
+und \(\tau^*\) ist ein optimaler Ausübungszeitpunkt, d. h. 
+\[ \E_\Q[\frac{H_{\tau^*}}{B_{\tau^*}}] = \sup_{\tau \leq T} \E_\Q [\frac{H_\tau}{B_\tau}]. \]
 \end{karte}
 
-\begin{karte}{}
+\begin{karte}{Preis einer amerikanischen Option zur Zeit \(t\)}
+Für den Preis \(\pi_t^A(H)\) zur Zeit \(t\) müssen wir folgendes Stoppproblem lösen: 
+\[ \pi_t^A(H) := B_t \sup_{t\leq \tau \leq T} \E_\Q[\frac{H_\tau}{B_\tau} | \F_t]. \]
+Nach Konstruktion der Snell-Einhüllenden \((Z_t)\) gilt: \(\pi_t^A(H) = B_t Z_t\).
+\end{karte}
 
+\begin{karte}{Spezialfall \(H_t/B_t\) Submartingal}
+Ist \((H_t B_t^{-1})\) ein \(\Q\)-Submartingal, dann gilt 
+\[ \pi_t^A(H) = \pi_t(H_T) \]
+und \(\tau^* = T\) ist ein optimaler Ausübungszeitpunkt. 
+Dabei ist \(\pi_t(H_T)\) der Preis der europäischen Option \(H_T\) zur Zeit \(t\).
+\end{karte}
+
+\begin{karte}{Preisungleichungen}
+Sei \(C_t^A\) der Preis einer amerikanischen Call-Option mit Basispreis \(K\) zur Zeit \(t\)
+und \(P_t^A\) der Preis einer amerikanischen Put-Option mit Basispreis \(K\) zur Zeit \(t\).
+
+Dann gilt die folgende Ungleichung: 
+\[ S_t - K \leq C_t^A - P_t^A \leq S_t - K \frac{B_t}{B_T}. \]
+\end{karte}
+
+\begin{karte}{Bewertung amerikanischer Optionen im CRR-Modell}
+Betrachte Spezialfall \(H_t = h(S_t)\). Snell-Einhüllenden von \((H_t B_t^{-1})\): 
+\begin{align*}
+    Z_T &= \frac{h(S_T)}{B_T} = \frac{h(S_T)}{(1+r)^T} =: Z_T(S_T), \\
+    Z_{T-1} &= \max\set{ \frac{H(S_{T-1})}{B_{T-1}}, \E_\Q[Z_T | \F_{T-1}] } \\
+    &= \max \set{ \frac{h(S_{T-1})}{(1+r)^{T-1}}, q Z_T(S_{T-1} u) + (1-q) Z_T(S_{T-1}d) } =: Z_{T-1}(S_{T-1}) \\
+    Z_t &= \max\set{ \frac{h(S_t)}{(1+r)^t}, q Z_{t+1}(S_t u) + (1-q) Z_{t+1}(S_t d) } =: Z_t(S_t), \\
+    Z_0 &= \max \set{ h(S_0), q Z_1 (S_0 u) + (1-q) Z_1(S_0 d) }.
+\end{align*}
+
+Für den Preisprozess gilt \(p_0(S_0) = \pi^A(H)\). 
+\[ \pi_t^A(H) = B_t Z_t = (1+r)^t Z_t(S_t) =: p_t(S_t). \]
+\begin{align*}
+    p_T(S_T) &= h(S_T), \\
+    p_t(S_t) &= \max \set{ h(S_t), \frac{1}{1+r} (qp_{t+1}(S_t u) + (1-q) p_{t+1}(S_t d))}.
+\end{align*}
+\end{karte}
+
+\subsection{Hedging}
+
+\begin{karte}{Hedging von amerikanischen Optionen}
+Eine selbstfinanzierende Handelsstrategie \(\varphi\) heißt Hedging-Strategie 
+(aus Sicht des Verkäufers) für eine amerikanische Option \((H_t)\), falls gilt: 
+\[ V_t^\varphi \geq H_t. \]
+Sei \((H_t)\) eine amerikanische Option. Dann gibt es eine Hedging-Strategie \(\varphi\) 
+mit 
+\[ V_0^\varphi = \pi^A(H) = \sup_\tau \E_\Q[\frac{H_\tau}{B_\tau}] = Z_0, \]
+wobei \((Z_t)\) die Snell-Einhüllende von \((H_t B_t^{-1})\) ist.
+
+Ist \(\varphi\) eine beliebige selbstfinanzierende Hedging-Strategie für \((H_t)\), 
+so gilt, dass \(( \frac{V_t^\varphi}{B_t} )\) ein \(\Q\)-Martingal mit 
+\(\frac{V_t^\varphi}{B_t} \geq \frac{H_t}{B_t}\) ist, damit \(Z_t \leq \frac{V_t^\varphi}{B_t}\). 
+
+Insgesamt folgt 
+\[ \pi^A(H) = \inf \set{ V_0^\varphi: \varphi \text{ ist eine selbstfinanz. Hedging-Strategie für } (H_t) }. \]
+\end{karte}
+
+\begin{karte}{Hedging amerikanischer Optionen im CRR-Modell}
+Wir betrachten das CRR-Modell und den Spezialfall \(H_t = h(S_t)\).
+Der Preisprozess sei \((p_t)\).
+Wir wollen nun eine Hedging-Strategie \(\varphi = (\alpha, \beta)\) für \((H_t)\) 
+bestimmen mit \(V_0^\varphi = Z_0\). Sei für \(t=0,\ldots, T-1\): 
+\begin{align*}
+    \alpha_t &:= \frac{p_{t+1}(uS_t) - p_{t+1}(d S_t)}{(u-d)S_t} \\
+    c_t &:= p_t(S_t) - \frac{1}{1+r} (q p_{t+1} ( u S_t) + (1-q) p_{t+1}(d S_t)).
+\end{align*}
+Interpretation: \((\alpha_t)\) ist die Investitionsstrategie in das risikobehaftete Wertpapier, 
+\((c_t)\) ist die Konsumstrategie. 
+Vermögensprozess \((V_t)\): 
+\begin{align*}
+    V_0 &:= p_0 (S_0) = Z_0 \\
+    V_{t+1} &:= \alpha_t S_{t+1} + (1+r) ( V_t - c_t - \alpha_t S_t).
+\end{align*}
+Sei \(\tau^* := \min\set{t\leq T: p_t(S_t) = h(S_t)}\) der optimale Ausübungszeitpunkt. 
+Dann gilt für \(t < \tau^*\), dass \(c_t = 0\) und \(V_t\) ist das Vermögen der Strategie \((\alpha_t)\) 
+zur Zeit \(t\).
+
+Es gilt \(V_t = p_t(S_t)\) für \(t=0,\ldots, T\), d. h. \((\alpha_t)\) ist eine 
+Hedging-Strategie für die amerikanische Option (mit Konsummöglichkeit bei nicht-optimaler Ausübung).
+\end{karte}
+
+\begin{karte}{Ausübung vor/zu/nach \(\tau^*\)}
+Ausübung vor \(\tau^*\): \(V_t = p_t(S_t) > h(S_t)\) und \(c_t = 0\). 
+Der Verkäufer behält den Gewinn \(V_t - h(S_t)\).
+
+Ausübung zu \(\tau^*\): \(V_{\tau^*} = p_{\tau^*}(S_{\tau^*}) = h(S_{\tau^*})\).
+Das Anlagevermögen reicht genau, um den Käufer auszuzahlen. Es bleibt kein Gewinn.
+
+Auszahlung nach \(\tau^*\): Hier kann \(c_{\tau^*} > 0\) konsumiert werden, es startet 
+ein neues Stoppproblem mit weiteren Gewinnmöglichkeiten für den Verkäufer.
+\end{karte}
+
+\begin{karte}{Put-Option im CRR-Modell}
+Für den Preis \(p_t(S_t)\) einer Put-Option gilt: 
+\begin{itemize}
+    \item \(x\mapsto p_t(x) + x\) ist nicht-fallend für \(t=0,\ldots, T\), 
+    \item \(t\mapsto p_t(x)\) ist nicht-wachsend für \(x>0\).
+\end{itemize}
+
+Es ist optimal auszuüben, wenn gilt: 
+\[ K \geq x + \frac{1}{1+r}(q p_{t+1}(ux) + (1-q)p_{t+1}(dx)). \]
+Da der zweite Ausdruck aber nicht-fallend in \(x\) ist, können wir 
+\[ x_t^* := \max\set{ x \geq 0: x + \frac{1}{1+r}(q p_{t+1}(ux) + (1-q)p_{t+1}(dx)) \leq K } \]
+definieren und erhalten für den optimalen Ausübungszeitpunkt 
+\[ \tau^* = \min\set{ t : p_t(S_t) = (K-S_t)^+ } = \min \set{ t: S_t \leq x_t^* } \wedge T. \]
+
+Es gilt \(x_0^* \leq \cdots \leq x_T^* =: K\).
 \end{karte}
