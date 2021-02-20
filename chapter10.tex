@@ -90,22 +90,97 @@ Falls \(\mu\) und \(\nu\) Normalverteilungen sind, dann sind \(\succeq_{MV}\)
 und \(\succeq_{SSD}\) äquivalent sind. Das gilt allerdings nicht immer.
 \end{karte}
 
-\begin{karte}{}
+\subsection{Optimierung mit risikolos}
 
+\begin{karte}{Voraussetzungen bei Optimierung mit risikolosem Wertpapier}
+\begin{itemize}
+    \item \(d\) risikobehaftete, ein risikoloses Wertpapier. 
+    \item Preise des risikolosen Wertpapiers zur Zeit \(t = 0\) und zur Zeit \(t=T\)
+    seien \(B_0\) und \(B_T\). 
+    \item Kovarianzmatrix \(\Sigma\) der \(d\) risikobehafteten Wertpapiere ist positiv definit.
+    \item Da \(Cov(B_T, S_T^k) = 0\) ist die erweiterte Kovarianzmatrix 
+    \[ \begin{pmatrix}
+        0 & 0 \\ 0 & \Sigma
+    \end{pmatrix} \in \R^{(d+1)\times (d+1)} \]
+    ist singulär.
+    \item Sei \(R_T^0 = \frac{B_T}{B_0} - 1 =: R^0\) und nehme an, dass \(R^0 e \neq m\).
+\end{itemize}
 \end{karte}
 
-\begin{karte}{}
+\begin{karte}{Optimierungsproblem mit risikolosem Wertpapier}
+Sei \((\pi_0, \ldots, \pi_d)\) der Portfoliovektor. 
+Es sei \(\pi_0 + \sum_{k=1}^d \pi_k = \pi_0 + \pi \cdot e = 1\).
+Also \(\pi_0 = 1 - \pi \cdot e\) und 
+\[ R^\pi = \sum_{k=0}^d \pi_k R_T^k = \sum_{k=1}^d \pi_k R_T^k + (1 - \sum_{k=1}^d \pi_k) R^0 \]
+\(\E[R^\pi] = \pi \cdot (m - R^0 e) + R^0\).\\
+\(Var(R^\pi) = \pi^T \Sigma \pi\).
 
+Sei \(m_p\) die Zielrendite, so ist das Optimierungsproblem jetzt 
+\[ (P): \min \frac{1}{2} \pi^T \Sigma \pi \text{ s.t. } \pi \cdot (m - R^0 e) + R^0 = m_p. \]
 \end{karte}
 
-\begin{karte}{}
-
+\begin{karte}{Optimales Portfolio bei risikolosem Wertpapier}
+Das optimale Portfolio (für die Investitionen in die risikobehafteten Wertpapiere) ist gegeben durch 
+\[ \pi^* = y^* b = \frac{m_p - R^0}{b \cdot m - R^0 b \cdot e} b. \]
+\(A, B, C, D\) wie bisher.
 \end{karte}
 
-\begin{karte}{}
+\begin{karte}{Tangentialportfolio}
+Das Portfolio 
+\[ \pi_{Tang}^* := \frac{ \Sigma^{-1} (m - R^0 e) }{A - R^0 C} \]
+heißt Tangentialportfolio (oder auch Marktportfolio).
 
+Beachte, dass \(e \cdot \pi_{Tang}^* = \frac{e \cdot b}{e \cdot b} = 1\), 
+und damit ist \(\pi_{Tang}^*\) ein Portfoliovektor im ursprünglichen Markowitz-Problem.
+
+Das Tangentialportfolio hängt nicht von \(m_p\) ab!
+
+Die Wahl eines effizienten Portfolios bedeutet also, dass die Präferenzen des Investors nur durch 
+seine Wahl des Anteils \(1-\alpha^*\), den er risikolos investiert, ausgedrückt werden. 
+
+One-Fund Theorem: Jedes effiziente Portfolio kann als Kombination aus dem Fund und dem risikolosen Wertpapier konstruiert werden.
 \end{karte}
 
-\begin{karte}{}
+\begin{karte}{Minimale Varianz}
+Die minimale Varianz ist gegeben durch 
+\[ \sigma_{Tobin}^2 (m_p) := (\alpha^*)^2 {\pi_{Tang}^*}^T \Sigma \pi_{Tang}^* = 
+\frac{(m_p - R^0)^2}{D \sigma_M^2 ( R^0 )}. \]
+\end{karte}
 
+\begin{karte}{Grenzportfolios mit risikolosem Wertpapier}
+Sei \(\Sigma\) positiv definit, \(m\neq R^0 e\) und \(A - R^0 C \neq 0\). Im Markt 
+mit einem risikolosen Wertpapier ist ein Portfolio ein Grenzportfolio \(\Leftrightarrow\)
+\[ \sigma_{Tobin} = \abs{\alpha^*} \sqrt{ {\pi_{Tang}^*}^T \Sigma \pi_{Tang}^* } 
+= \abs{\frac{m_p - R^0}{m \cdot \pi_{Tang}^* - R^0}} \sqrt{{\pi_{Tang}^*}^T \Sigma \pi_{Tang}^*}. \]
+Effizient sind alle Portfolios auf der so beschriebenen Portfoliogrenze, deren erwartete 
+Rendite größer \(R^0\) ist.
+\end{karte}
+
+\begin{karte}{Kapitalmarktlinie, Risikoprämie}
+Die effizienten Portfolios liegen auf der sogenannten Kapitalmarktlinie 
+\[ m_p = R^0 + \sigma_{Tobin} \frac{\abs{m \cdot \pi_{Tang}^* - R^0}}{\sqrt{{\pi_{Tang}^*}^T \Sigma \pi_{Tang}^*}}. \]
+Der Faktor neben \(\sigma_{Tobin}\) wird Marktrisikoprämie (oder auch Sharpe-Ratio) genannt. 
+Er entspricht der Steigung der Kapitalmarktlinie.
+\end{karte}
+
+\begin{karte}{Optimales Markowitz-Portfolio}
+Für das optimale Markowitz-Portfolio gilt: 
+\[ \pi_M(m_p) = \frac{C m_p - A}{D} \Sigma^{-1} m + \frac{B - A m_p}{D} \Sigma^{-1} e. \]
+Für \(A \neq R^0 C\) gilt für das Tangentialportfolio: 
+\[ \pi_{Tang}^* = \frac{1}{A - R^0 C} \Sigma^{-1} m - \frac{R^0}{A - R^0 C} \Sigma^{-1} e \]
+und \(m^* := m \cdot \pi_{Tang}^* = \frac{B - R^0 A}{A - R^0 C}\). Falls \(A - R^0 C > 0\), gilt 
+\(m^* > R^0\). In diesem Fall ist das Tangentialportfolio effizient, es gilt 
+\[ \pi_M(m^*) = \pi_{Tang}^*. \]
+Insbesondere folgt \(\alpha^* = 1\) und \(\sigma_M(m^*) = \sigma_{Tobin}(m^*)\). 
+Man kann nachrechnen, dass \(\sigma'_M(m^*) = \sigma'_{Tobin}(m^*)\), d. h. im Punkt \(m^*\) 
+berühren sich die Portfoliogrenze und die Kapitalmarktlinie tangential.
+\end{karte}
+
+\begin{karte}{Zero-Wealth-Portfolio}
+Falls \(R^0 = \frac{A}{C}\), gilt 
+\[e \cdot b = e^T \Sigma^{-1} (m - R^0 e) = e^T \Sigma^{-1} m - R^0 e^T \Sigma e = A - R^0 C = 0,\]
+und es gibt kein Tangentialportfolio. Weiter ist \(\pi_0 = 1\), d. h. das gesamte Vermögen wird 
+risikolos investiert und das Zero-Wealth-Portfolio der risikobehafteten Wertpapiere ist 
+\[ \pi_{zero} = \frac{m_p - R^0}{B - R^0 A}b. \]
+Es wird durch Kauf und Verkauf der verschiedenen Wertpapiere erzeugt.
 \end{karte}

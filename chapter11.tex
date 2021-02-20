@@ -1,0 +1,123 @@
+\section{Risikomaße}
+
+\begin{karte}{Monetäres Risikomaß}
+Eine Abbildung \(\abb{\rho}{L^1}{\R}\) wird monetäres Risikomaß genannt, falls für 
+\(X,Y\in L^1\) gilt: 
+\begin{itemize}
+    \item Monotonie: Falls \(X\leq Y\), dann gilt \(\rho(X) \geq \rho(Y)\).
+    \item Translationsinvarianz: \(\rho(X+m) = \rho(X) - m\) für alle \(m\in \R\).
+\end{itemize}
+
+Monotonie: Das Downside-Risiko einer Position ist reduziert, wenn das Auszahlungsprofil größer ist.
+
+Translationsinvarianz: \(\rho(X)\) kann als Kapitalanforderung im Sinne einer Aufsichtsinstanz interpretiert 
+werden. Wenn \(m\in\R\) zu der Position hinzugefügt und risikofrei investiert wird, reduziert das die 
+Kapitalanforderung um den gleichen Betrag.
+\end{karte}
+
+\begin{karte}{Verteilungsinvariant}
+Ein monetäres Risikomaß \(\abb{\rho}{L^1}{\R}\) heißt verteilungsinvariant, falls \(\rho(X) = \rho(Y)\), 
+wenn \(X\) und \(Y\) dieselbe Verteilung haben. 
+\end{karte}
+
+\begin{karte}{Konvexes Risikomaß}
+Ein monetäres Risikomaß \(\abb{\rho}{L^1}{\R}\) heißt konvexes Risikomaß, falls für 
+\(0 \leq \lambda \leq 1\) und \(X,Y\in L^1\) 
+\[ \rho(\lambda X + (1-\lambda) Y) \leq \lambda \rho(X) + (1-\lambda) \rho(Y). \]
+
+Sei \(\rho\) positiv homogen. Dann gilt: \(\rho\) konvex \(\Leftrightarrow \rho\) subadditiv.
+\end{karte}
+
+\begin{karte}{Kohärentes Risikomaß}
+Ein monetäres Risikomaß heißt kohärentes Risikomaß, falls es konvex und 
+positiv homogen ist, d. h. falls es konvex ist und für alle \(\lambda \geq 0\) gilt 
+\(\rho(\lambda X) = \lambda \rho(X)\).
+\end{karte}
+
+\begin{karte}{\(\lambda\)-Quantile}
+Die Menge aller \(\lambda\)-Quantile von \(X\) ist ein Intervall \([q_X^-(\lambda), q_X^+(\lambda)]\) 
+mit 
+\[ q_X^-(\lambda) = \sup \set{x : \P(X<x) < \lambda} =\inf \set{x: \P(X\leq x) \geq \lambda}, \]
+\[ q_X^+(\lambda) = \inf \set{x: \P(X\leq x) > \lambda} = \sup \set{x: \P(X<x) \leq \lambda}.\]
+Mit \(F_X(x) = \P(X \leq x)\) ausgedrückt
+\[ q_X^-(\lambda) = \inf \set{x: F_X(x) \geq \lambda}, \]
+\[ q_X^+(\lambda) = \inf \set{x: F_X(x) > \lambda}. \]
+\end{karte}
+
+\begin{karte}{Value at Risk}
+Sei \(L^0 := \set{\abb{X}{\Omega}{\R}: X \text{ZV mit } X(\omega) < \infty, \P\text{-f.s.}} \).
+
+Sei \(\lambda \in (0,1)\). Für \(X \in L^0\) definiere den Value at Risk zum Niveau \(\lambda\) als 
+\[ VaR_\lambda(X) := -q_X^+(\lambda) = q_{-X}^-(1-\lambda) = \inf\set{m: \P(X+m < 0) \leq \lambda}. \]
+
+Der Value at Risk ist ein monetäres, positiv homogenes Risikomaß.
+
+Im Finanzkontext ist \(VaR_\lambda(X)\) die kleinste Kapitalmenge, die - sobald sie zu \(X\)
+hinzugefügt und in ein risikoloses Wertpapier investiert wird - die Wahrscheinlichkeit 
+eines negativen Endvermögens unter dem Niveau \(\lambda\) hält. 
+\end{karte}
+
+\begin{karte}{Value at Risk bei Normalverteilungen}
+In der Klasse der Normalverteilungen ist der Value at Risk konvex, also auch kohärent, falls 
+\(\lambda \in (0,\frac{1}{2}]\).
+\end{karte}
+
+\begin{karte}{Average Value at Risk}
+Der Average Value at Risk zum Niveau \(\lambda \in (0,1]\) einer Position \(X\in L^1\) ist gegeben durch 
+\[ AVaR_\lambda(X) = \frac{1}{\lambda} \int_0^\lambda VaR_\lambda(X) d\gamma. \]
+
+\(AVaR_\lambda\) ist verteilungsinvariant. \(AVaR_\lambda(X) \geq VaR_\lambda(X)\).
+Es gilt 
+\[ AVaR_\lambda(X) = -\frac{1}{\lambda}\int_0^\lambda q_X^+(\gamma) d\gamma 
+= - \frac{1}{\gamma} \int_0^\gamma F_X^{-1}(\gamma) d\gamma, \]
+wenn man beachtet, dass \(q_X^+(\gamma)\) und \(q_X^-(\gamma)\) bis auf abzählbar viele
+\(\gamma\) übereinstimmen. 
+
+Für \(\lambda=1\) gilt \(AVaR_1(X) = \E[-X]\).
+\end{karte}
+
+\begin{karte}{AVaR und SSD}
+Seien \(X,Y\in L^1\). Dann gilt 
+\[ X \succeq_{SSD} Y \Leftrightarrow AVaR_\lambda(X) \leq AVaR_\lambda(Y), \lambda \in (0,1]. \]
+\end{karte}
+
+\begin{karte}{Expected Shortfall zum Niveau \(\lambda \in (0,1)\)}
+Der Expected Shortfall zum Niveau \(\lambda \in (0,1)\) einer Position \(X \in L^1\) ist 
+\[ E S_\lambda(X) = -\frac{1}{\lambda} (\E[X 1_{\set{X<q}}] + q(\lambda - \P(X<q))), \]
+wobei \(q\) ein \(\lambda\)-Quantil von \(X\) ist.
+
+Ist die Verteilungsfunktion \(F_X\) stetig, so ist \(\P(X<q) = \lambda\) und es gilt 
+\[ E S_\lambda(X) = -\frac{1}{\lambda} \E[X 1_{\set{X < q}}] = -\E[X | X < q]. \]
+\end{karte}
+
+\begin{karte}{Conditional Value at Risk}
+Der Conditional Value at Risk zum Niveau \(\lambda \in (0,1)\) einer Position \(X\in L^1\)
+ist gegeben durch 
+\[ CVaR_\lambda(X) = \frac{1}{\lambda} \inf_{s\in \R} \set{ \E[(X-s)^-] - s\lambda } = \frac{1}{\lambda} \E[(X-q)^-] - q, \]
+wobei \(q\) ein \(\lambda\)-Quantil von \(X\) ist.
+\end{karte}
+
+\begin{karte}{AVaR, Expected Shortfall, CVaR Eigenschaften}
+Die Definitionen von Average Value at Risk, Expected Shortfall und Conditional Value at Risk stimmen überein.
+
+Für \(\lambda\in (0,1]\) ist \(AVaR_\lambda\) ein kohärentes Risikomaß.
+
+Für \(\lambda \in (0,1]\) hat der \(AVaR_\lambda(X)\) die Form 
+\[ AVaR_\lambda(X) = \max_{\Q\in \Q_\lambda} \E_\Q[-X], \]
+wobei 
+\[ \Q_\lambda := \set{\Q \text{ ist ein W-Maß: }\frac{d\Q}{d\P} \leq \frac{1}{\lambda}}. \]
+Das Maximum wird von \(\tilde{\Q}\) angenommen mit 
+\[ \frac{d\tilde{\Q}}{d\P} = 1_{\set{X < q}}^{(\lambda)}, \]
+wobei \(1_{\set{X < q}}^{(\lambda)}\) wie vorher definiert ist und \(q\) ein 
+\(\lambda\)-Quantil von \(X\) ist.
+\end{karte}
+
+\begin{karte}{Zwei-Portfolio-Probleme}
+\[(P): \min Var(R^\pi) \text{ s.t. } \E[R^\pi] = m_p, \pi \cdot e = 1. \]
+Betrachte für ein Risikomaß \(\rho\)
+\[ (P_\rho): \min \rho(R^\pi) \text{ s. t. } \E[R^\pi] = m_p, \pi \cdot e = 1. \]
+
+Die Renditen seien gemeinsam normalverteilt. Weiter sei \(\rho\) verteilungsinvariant, 
+translationsinvariant und positiv homogen mit \(\rho(Z) > 0\), für \(Z \sim \mathcal{N}(0,1)\). 
+Dann gilt: \(\pi^*\) optimal für \((P) \Leftrightarrow \pi^*\) optimal für \((P_\rho)\).
+\end{karte}
